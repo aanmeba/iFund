@@ -1,0 +1,3 @@
+class Organiser < User
+  
+end
