@@ -32,6 +32,7 @@ if Project.count == 0
       due_date: Faker::Date.between(from: 2.days.ago, to: 1.year.from_now),
       category_id: rand(1..6),
       user_id: 1,
+      goal_amount: ("#{rand(1..9)}" + ("0"*rand(3..6))).to_i
     )
     puts "created a project"
   end

@@ -52,6 +52,7 @@ class ProjectsController < ApplicationController
 
   def set_form_vars
     @categories = Category.all
+    @statuses = ["ongoing", "upcoming", "completed"]
   end
 
 end
