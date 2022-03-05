@@ -4,7 +4,7 @@
     <% @projects.each do |project| %>
       <div class="col mb-4">
         <div class="card border-dark h-100">
-          
+          <%= image_tag project.picture, alt: project.title, class: "thumbnail card-img top" if project.picture.attached? %>
           <div class="card-body">
             <h5><%= project.title %></h5>
             

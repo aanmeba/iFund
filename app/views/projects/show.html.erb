@@ -5,7 +5,9 @@
   </div>
 
   <div class="row">
-    <div class="col">Image</div>
+    <div class="col">
+      <%= image_tag @project.picture, alt: @project.title, class: "thumbnail card-img top" if @project.picture.attached? %>
+    </div>
     <div class="col">
       <h1><%= @project.title %></h1>
       <h3>Goal: <%= @project.goal_amount %></h3>
