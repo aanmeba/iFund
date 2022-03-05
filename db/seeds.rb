@@ -15,15 +15,24 @@ if Category.count == 0
   end
 end
 
-statues = ["ongoing", "upcoming", "passed"]
-
-if Status.count == 0
-  statues.each do |s|
-    Status.create(name: s)
-    puts "created #{s} status"
-  end
+if User.count == 0
+  User.create(
+    email: "test@test.com",
+    password: "test123"
+  )
+  puts "created a default user"
 end
 
 if Project.count == 0
-  
+  3.times do |i|
+    Project.create(
+      title: Faker::Movie.title,
+      description: Faker::Hacker.say_something_smart,
+      start_date: Faker::Date.between(from: 1.months.ago, to: 2.days.from_now),
+      due_date: Faker::Date.between(from: 2.days.ago, to: 1.year.from_now),
+      category_id: rand(1..6),
+      user_id: 1,
+    )
+    puts "created a project"
+  end
 end
