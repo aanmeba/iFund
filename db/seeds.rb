@@ -15,6 +15,15 @@ if Category.count == 0
   end
 end
 
+statues = ["ongoing", "upcoming", "passed"]
+
+if Status.count == 0
+  statues.each do |s|
+    Status.create(name: s)
+    puts "created #{s} status"
+  end
+end
+
 if Project.count == 0
-    
+  
 end
