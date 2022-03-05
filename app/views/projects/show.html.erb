@@ -14,6 +14,7 @@
       <p class="badge badge-pill badge-info"><%= @categories.find(@project.category_id).name %></p>
       <p>Start Date: <%= @project.start_date %></p>
       <p>Due Date: <%= @project.due_date %></p>
+      <p>D-<%= ((@project.due_date) - (@project.start_date)).to_i %></p>
     </div>
     <div class="w-100"></div>
     <div class="col">

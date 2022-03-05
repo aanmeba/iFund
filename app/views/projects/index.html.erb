@@ -7,14 +7,10 @@
           <%= render "picture", temp: project %>
           <div class="card-body">
             <h5><%= project.title %></h5>
-            
+            <p class="badge badge-pill badge-info"><%= @categories.find(project.category_id).name %></p>
             <div class="d-flex justify-content-between">
               <%= link_to "See More", project_path(project.id), class: "btn btn-outline-primary"%>
-              <% if !project.goal_amount %>
-                <h5>$0</h5>
-              <% else %>
-                <h5><%= project.goal_amount %></h5>
-              <% end %>
+              <h5>D-<%= ((project.due_date) - (project.start_date)).to_i %></h5>
             </div>
           </div>
         </div>
