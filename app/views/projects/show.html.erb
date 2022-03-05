@@ -6,7 +6,7 @@
 
   <div class="row">
     <div class="col">
-      <%= image_tag @project.picture, alt: @project.title, class: "thumbnail card-img top" if @project.picture.attached? %>
+      <%= render "picture", temp: @project %>
     </div>
     <div class="col">
       <h1><%= @project.title %></h1>

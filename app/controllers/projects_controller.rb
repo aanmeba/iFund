@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_form_vars, only: [:new, :create, :show, :edit]
+  before_action :set_form_vars, only: [:new, :create, :show, :edit, :index]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
