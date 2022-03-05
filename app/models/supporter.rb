@@ -1,3 +1,3 @@
 class Supporter < User
-  
+
 end

@@ -1,0 +1,36 @@
+<div class="container">
+  <%= form_with model: @project, local: true do |f| %>
+    <div class="field">
+      <%= f.label :title, class: "col-sm-2 col-form-label" %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field">
+      <%= f.label :category_id, class: "col-sm-2 col-form-label" %>
+      <%= f.select :category_id, @categories.map {|c| [c.name, c.id]} %>
+    </div>
+    <div class="field">
+      <%= f.label :start_date, class: "col-sm-2 col-form-label" %>
+      <%= f.date_field :start_date %>
+    </div>
+    <div class="field">
+      <%= f.label :due_date, class: "col-sm-2 col-form-label" %>
+      <%= f.date_field :due_date %>
+    </div>
+    <div class="field">
+      <%= f.label :goal_amount, class: "col-sm-2 col-form-label" %>
+      <%= f.text_field :goal_amount %>
+    </div>
+    <div class="field">
+      <%= f.label :description, class: "col-sm-2 col-form-label" %>
+      <%= f.text_area :description, size: "40x10" %>
+    </div>
+    <div class="field">
+      <%= f.label :picture, class: "col-sm-2 col-form-label" %>
+      <%= f.file_field :picture %>
+    </div>
+    
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  <% end %>
+</div>
