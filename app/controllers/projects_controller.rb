@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+
   before_action :set_form_vars, only: [:new, :create, :show, :edit, :index]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :authorise_user, only: [:edit, :update, :destroy]
@@ -18,7 +19,8 @@ class ProjectsController < ApplicationController
       if current_user.type != "Organiser"
         current_user.update(type: "Organiser")
       end
-      redirect_to projects_path, notice: "Succesfully created"
+      session[:project_id] = @project.id
+      redirect_to rewards_path
     else
       render "new", notice: "Something went wrong"
     end
@@ -58,6 +60,7 @@ class ProjectsController < ApplicationController
   def set_form_vars
     @categories = Category.all
     @statuses = ["ongoing", "upcoming", "completed"]
+    @options = Option.all
   end
 
   def authorise_user

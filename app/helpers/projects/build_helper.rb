@@ -1,0 +1,2 @@
+module Projects::BuildHelper
+end

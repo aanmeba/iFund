@@ -6,10 +6,10 @@
     </div>
   <% end %>
   <div class="row">
-    <div class="col">
+    <div class="col mt-5">
       <%= render "picture", temp: @project %>
     </div>
-    <div class="col">
+    <div class="col mt-5">
       <h1><%= @project.title %></h1>
       <h3>Goal: <%= @project.goal_amount %></h3>
       <p class="badge badge-pill badge-info"><%= @categories.find(@project.category_id).name %></p>
@@ -18,9 +18,23 @@
       <p>D-<%= ((@project.due_date) - (@project.start_date)).to_i %></p>
     </div>
     <div class="w-100"></div>
-    <div class="col">
+    
+    <div class="col mt-5">
       <p><%= @project.description%></p>
     </div>
-    <div class="col">options</div>
+
+    <div class="col mt-5">
+      <h3>Options</h3>
+      <ul> Option 1
+        <li><%= @project.option1_title %></li>
+        <li><%= @project.option1_amount %></li>
+        <li><%= @project.option1_details %></li>
+      </ul>
+      <ul> Option 2
+        <li><%= @project.option2_title %></li>
+        <li><%= @project.option2_amount %></li>
+        <li><%= @project.option2_details %></li>
+      </ul>
+    </div>
   </div>
 </section>
