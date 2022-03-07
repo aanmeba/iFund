@@ -1,22 +1,3 @@
 <h1>Add Rewards & Options</h1>
 
-<%= form_with model: @project, url: wizard_path, method: :put do |f| %>
-  <h5>Option </h5>
-  <div class="field">
-    <%= f.label :option1_title, class: "col-sm-2 col-form-label" %>
-    <%= f.text_field :option1_title %>
-  </div>
-  <div class="field">
-    <%= f.label :option1_amount, class: "col-sm-2 col-form-label" %>
-    <%= f.text_field :option1_amount %>
-  </div>
-  <div class="field">
-    <%= f.label :option1_details, class: "col-sm-2 col-form-label" %>
-    <%= f.text_area :option1_details %>
-  </div>
-  <div class="actions">
-      <%= f.submit "Continue" %>
-      or <%= link_to "Skip", next_wizard_path %>
-  </div>
-<% end %>
-    
+<%= render "option" %>

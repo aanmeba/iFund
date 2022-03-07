@@ -35,7 +35,9 @@ class ProjectsController < ApplicationController
   def update
     @project.update(project_params)
     if @project.save
-      redirect_to @project, notice: "Project successfully updated"
+      session[:project_id] = @project.id
+      redirect_to rewards_path
+      # redirect_to @project, notice: "Project successfully updated"
     else
       set_form_vars
       render "edit", notice: "Something went wrong"
