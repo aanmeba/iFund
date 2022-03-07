@@ -1,9 +1,10 @@
 <section class="container">
-  <div class="links" style="display: flex; justify-content: flex-end;">
-    <%= link_to "Edit", edit_project_path(@project.id), class: "mr-3" %>
-    <%= link_to "Delete", destroy_project_path(@project.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
-  </div>
-
+  <% if user_signed_in? && current_user.id == @project.user_id %>
+    <div class="links" style="display: flex; justify-content: flex-end;">
+      <%= link_to "Edit", edit_project_path(@project.id), class: "mr-3" %>
+      <%= link_to "Delete", destroy_project_path(@project.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
+    </div>
+  <% end %>
   <div class="row">
     <div class="col">
       <%= render "picture", temp: @project %>

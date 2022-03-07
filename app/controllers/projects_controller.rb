@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   before_action :set_form_vars, only: [:new, :create, :show, :edit, :index]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :authorise_user, only: [:edit, :update, :destroy]
 
   def index
     @projects = Project.all
@@ -13,6 +14,10 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.new(project_params)
     if @project.save
+      # If a user create a project, the user type will be changed into Organiser
+      if current_user.type != "Organiser"
+        current_user.update(type: "Organiser")
+      end
       redirect_to projects_path, notice: "Succesfully created"
     else
       render "new", notice: "Something went wrong"
@@ -53,6 +58,12 @@ class ProjectsController < ApplicationController
   def set_form_vars
     @categories = Category.all
     @statuses = ["ongoing", "upcoming", "completed"]
+  end
+
+  def authorise_user
+    if current_user.id != @project.user_id
+      redirect_to projects_path, notice: "You aren't authorised to do that."
+    end
   end
 
 end
