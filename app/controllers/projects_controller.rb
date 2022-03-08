@@ -27,6 +27,9 @@ class ProjectsController < ApplicationController
   end
 
   def show
+    pp @options.find_by(project_id: @project)
+    @option = @options.where(project_id: @project.id)
+    pp @option.class
   end
 
   def edit
@@ -36,7 +39,7 @@ class ProjectsController < ApplicationController
     @project.update(project_params)
     if @project.save
       session[:project_id] = @project.id
-      redirect_to rewards_path
+      redirect_to edit_reward_path(65)
       # redirect_to @project, notice: "Project successfully updated"
     else
       set_form_vars

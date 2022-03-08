@@ -25,16 +25,12 @@
 
     <div class="col mt-5">
       <h3>Options</h3>
-      <ul> Option 1
-        <li><%= @project.option1_title %></li>
-        <li><%= @project.option1_amount %></li>
-        <li><%= @project.option1_details %></li>
-      </ul>
-      <ul> Option 2
-        <li><%= @project.option2_title %></li>
-        <li><%= @project.option2_amount %></li>
-        <li><%= @project.option2_details %></li>
-      </ul>
+      <% @option.each do |option| %>
+        <ul><%= option.title %>
+          <li><%= option.amount %></li>
+          <li><%= option.description %></li>
+        </ul>
+      <% end %>
     </div>
   </div>
 </section>

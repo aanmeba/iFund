@@ -2,11 +2,13 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
-  resources :rewards
-  # resources :projects do
-  #   resources :option, only: [:show, :create, :edit, :update]
-  # end
-  
+  resources :rewards do
+
+    get 'rewards/:id/edit', to: 'rewards#edit', as: 'edit_reward'
+    put 'reward/:id', to: 'rewards#update'
+    patch 'reward/:id', to: 'rewards#update'
+  end
+
   
   root to: 'pages#home'
   get 'projects', to: 'projects#index', as: 'projects'

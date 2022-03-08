@@ -4,10 +4,11 @@ class RewardsController < ApplicationController
 
   def show 
     # @option = Project.find(session[:project_id])
-    @option = Option.new(project_id: session[:project_id])
-    @option.save
-    puts "that's great!"
-    pp @option
+    # if params["update"]
+    #   @option.find_by(session[:project_id])
+    # else
+      @option = Option.new
+    # end
     render_wizard
   end
   
@@ -15,17 +16,18 @@ class RewardsController < ApplicationController
     # @option = Project.find(session[:project_id])
     # @option.update(option_params)
     
-    @option = Option.new(project_id: session[:project_id])
-    @option.save
+    @option = Option.new(option_params)
+    @option.project_id = session[:project_id]
+  
     pp @option
     puts "that's REALLY awesome!"
     render_wizard @option
       
   end
 
-  # def option_params
-  #   params.permit(:option1_title, :option1_amount, :option1_details, :option2_title, :option2_amount, :option2_details)
-  # end
+  def option_params
+    params.require(:option).permit(:title, :amount, :description)
+  end
 
   private
   def redirect_to_finish_wizard_path
