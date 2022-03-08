@@ -19,15 +19,15 @@ class OptionsController < ApplicationController
   def create
     @option = Option.new(option_params)
     @option.project_id = @project_id
-    pp @project_id
-    pp @option
+    # pp @project_id
+    # pp @option
     if @option.save
-      puts "==============================================="
-      pp "saved"
-      redirect_to root_url
+      # puts "==============================================="
+      # pp "saved"
+      redirect_to project_path(@project_id)
     else
-      puts "==============================================="
-      pp "something went wrong"
+      # puts "==============================================="
+      # pp "something went wrong"
       render "new"
     end
   end
@@ -38,12 +38,12 @@ class OptionsController < ApplicationController
   def update
     @option.update(option_params)
     if @option.save
-      puts "==============================================="
-      pp "saved"
+      # puts "==============================================="
+      # pp "saved"
       redirect_to root_url, notice: "GREAT!"
     else
-      puts "==============================================="
-      pp "WHAT!?!?!?!?"
+      # puts "==============================================="
+      # pp "WHAT!?!?!?!?"
       render "edit"
     end
   end

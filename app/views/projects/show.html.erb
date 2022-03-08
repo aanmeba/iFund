@@ -5,6 +5,7 @@
       <%= link_to "Delete", destroy_project_path(@project.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
     </div>
   <% end %>
+  
   <div class="row">
     <div class="col mt-5">
       <%= render "picture", temp: @project %>

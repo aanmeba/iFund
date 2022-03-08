@@ -27,7 +27,7 @@ if Project.count == 0
   3.times do |i|
     Project.create(
       title: Faker::Movie.title,
-      description: Faker::Hacker.say_something_smart,
+      description: Faker::Lorem.paragraph_by_chars(number: 456, supplemental: false),
       start_date: Faker::Date.between(from: 1.months.ago, to: 2.days.from_now),
       due_date: Faker::Date.between(from: 2.days.ago, to: 1.year.from_now),
       category_id: rand(1..6),

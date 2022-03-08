@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   }
 
   root to: 'pages#home'
+  get 'pages/check_out', to: 'pages#check_out', as: 'check_out'
   get 'projects', to: 'projects#index', as: 'projects'
   post 'projects', to: 'projects#create'
   get 'projects/new', to: 'projects#new', as: 'new_project' 
