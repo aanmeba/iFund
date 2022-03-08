@@ -1,0 +1,8 @@
+<!-- .js.erb file keeps throwing ActionController::UnknownFormat so it's html.erb file -->
+<script>
+  const stripe = Stripe("<%=Rails.application.credentials.dig(:stripe, :public_key)%>");
+  console.log("so far so good");
+  stripe.redirectToCheckout({
+    sessionId: "<%= @session_id %>"
+  });
+</script>

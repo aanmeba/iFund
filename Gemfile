@@ -62,3 +62,5 @@ gem "aws-sdk-s3", "~> 1.113"
 
 gem "faker", "~> 2.19", :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 
+
+gem "stripe", "~> 5.45"

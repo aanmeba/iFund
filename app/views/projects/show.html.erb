@@ -17,6 +17,37 @@
       <p>Start Date: <%= @project.start_date %></p>
       <p>Due Date: <%= @project.due_date %></p>
       <p>D-<%= ((@project.due_date) - (@project.start_date)).to_i %></p>
+
+      <div>
+        <%= form_with url: support_session_path(id: @project.id) do |f| %>
+          <div class="field">
+            <%= f.label :price, "Customise your pledge:" %>
+            <%= f.text_field :price %>
+          </div>
+
+          <% @option.each do |option| %>
+            <div class="field">
+              <%= f.label :price, option.amount, class: "form-label mr-1" %>
+              <%= f.radio_button :price, option.amount, class: "mr-2" %>
+            </div>
+          <% end %>
+
+          <div class="actions">
+            <%= f.button "Support", 
+              class: "btn btn-primary",
+              data: {disable_with: "Loading..."}
+            %>
+          </div>
+        <% end %>
+<%#         
+        <%= button_to "Check Out",
+          support_session_path,
+          remote: true,
+          method: :post,
+          params: {id: @project.id, price: 6500},
+          class: "btn btn-primary",
+          data: {disable_with: "Loading..."} %>
+      </div>
     </div>
     <div class="w-100"></div>
     
@@ -30,3 +61,13 @@
     </div>
   </div>
 </section>
+
+<script>
+  // let pay_btn = document.querySelectorAll('.btn');
+  // pay_btn.addEventListener('click', () => {
+  //   let get_price = document.getElementById('price').value;
+  //   console.log('clicked!!!!');
+  //   "<%= @project.amount %>": get_price;
+  // });
+  
+</script>

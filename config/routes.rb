@@ -23,4 +23,10 @@ Rails.application.routes.draw do
   put 'options/:id', to: 'options#update'
   patch 'options/:id', to: 'options#update'
   delete 'options/:id', to: 'options#destroy', as: 'destroy_option'
+
+  get 'payments/success/:id', to: 'payments#success', as: 'payments_success'
+  # post "payments/webhook", to: "payments#webhook"
+  # get 'payments', to: 'payments#index', as: 'payments'
+  post 'payments', to: 'payments#support_session', as: 'support_session'
+  # post 'payments', to: 'payments#create_support_session', as: 'create_support_session'
 end
