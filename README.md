@@ -13,6 +13,12 @@ T2A2 - Two-sided marketplace app
 옵션의 경우 옵션 1과 2는 다른 프라이머리키를 가지되 같은 포린키를 가져야 하기 때문에 따로 저장
 -> 위키드는 하나의 폼을 단계를 나누는 데 유용하기 때문에 위키드는 적절하지 않음
 
+https://gorails.com/forum/actioncontroller-unknownformat-in-messagescontroller-create
+
+## js variable cannot be assigned to rails
+
+https://stackoverflow.com/questions/12067270/assign-javascript-variable-to-ruby-variable
+
 ## STI
 
 References:
