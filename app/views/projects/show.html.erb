@@ -24,13 +24,8 @@
     </div>
 
     <div class="col mt-5">
-      <h3>Options</h3>
-      <% @option.each do |option| %>
-        <ul><%= option.title %>
-          <li><%= option.amount %></li>
-          <li><%= option.description %></li>
-        </ul>
-      <% end %>
+      <%= render "options/show" %>
+      
     </div>
   </div>
 </section>

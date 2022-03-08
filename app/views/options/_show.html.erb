@@ -1,0 +1,16 @@
+<h3> Option - Show page</h3>
+<%= link_to "New Option", new_option_path(project_id: @project.id), class: "mr-3" %>
+
+<% if user_signed_in? && current_user.id == @project.user_id %>
+  <% @option.each do |option| %>
+    <h5><%= option.title %></h5>
+    <%= link_to "Edit", edit_option_path(id: option.id), class: "mr-3" %>
+    <%= link_to "Delete", destroy_option_path(option.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
+    <ul>
+      <li>Option ID: <%= option.id %></li>
+      <li>Amount: <%= option.amount %></li>
+      <li>Details: <%= option.description %></li>
+    </ul>
+  <% end %>
+
+<% end %>

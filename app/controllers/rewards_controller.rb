@@ -4,21 +4,26 @@ class RewardsController < ApplicationController
 
   def show 
     # @option = Project.find(session[:project_id])
-    # if params["update"]
-    #   @option.find_by(session[:project_id])
-    # else
+    if params[:update]
+      @options = Option.all
+      pp session[:project_id]
+      @options.find_by(project_id: session[:project_id])
+    else
       @option = Option.new
-    # end
+    end
     render_wizard
   end
   
   def update 
     # @option = Project.find(session[:project_id])
     # @option.update(option_params)
-    
-    @option = Option.new(option_params)
-    @option.project_id = session[:project_id]
-  
+    if params[:update]
+      @options = Option.all
+      @options.find_by(project_id: session[:project_id])
+    else
+      @option = Option.new(option_params)
+      @option.project_id = session[:project_id]
+    end
     pp @option
     puts "that's REALLY awesome!"
     render_wizard @option

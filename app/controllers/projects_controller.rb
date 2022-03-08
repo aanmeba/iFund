@@ -19,17 +19,21 @@ class ProjectsController < ApplicationController
       if current_user.type != "Organiser"
         current_user.update(type: "Organiser")
       end
+
       session[:project_id] = @project.id
-      redirect_to rewards_path
+      redirect_to new_option_path
+      
+      # wicked
+      # session[:project_id] = @project.id
+      # redirect_to rewards_path
     else
       render "new", notice: "Something went wrong"
     end
   end
 
   def show
-    pp @options.find_by(project_id: @project)
     @option = @options.where(project_id: @project.id)
-    pp @option.class
+    session[:project_id] = @project.id
   end
 
   def edit
@@ -38,9 +42,11 @@ class ProjectsController < ApplicationController
   def update
     @project.update(project_params)
     if @project.save
-      session[:project_id] = @project.id
-      redirect_to edit_reward_path(65)
-      # redirect_to @project, notice: "Project successfully updated"
+      # session[:project_id] = @project.id
+      # redirect_to rewards_path(update: true)
+      # @option = @options.where(project_id: @project.id)
+      # redirect_to edit_option_path
+      redirect_to @project, notice: "Project successfully updated"
     else
       set_form_vars
       render "edit", notice: "Something went wrong"
