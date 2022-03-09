@@ -30,8 +30,8 @@ class ProjectsController < ApplicationController
   def show
     @option = @options.where(project_id: @project.id)
     session[:project_id] = @project.id
+    @total_supporters = Support.where(project_id: @project.id).count
 
-    
   end
 
   def edit
@@ -53,6 +53,10 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def data_summary
+  
+  end
 
   def project_params
     params.require(:project).permit(:title, :category_id, :start_date, :due_date, :goal_amount, :description, :picture)

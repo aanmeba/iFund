@@ -32,3 +32,7 @@ References:
 - https://stackoverflow.com/questions/38477023/how-to-generate-registration-controller-of-devise-gem
 
 - https://api.rubyonrails.org/v7.0.2.2/classes/ActiveRecord/Inheritance.html
+
+## remind - instance variable in Rails controller
+
+- https://stackoverflow.com/questions/36815383/understanding-rails-instance-variables

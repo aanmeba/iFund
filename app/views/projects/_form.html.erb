@@ -6,7 +6,7 @@
     </div>
     <div class="field">
       <%= f.label :category_id, class: "col-sm-2 col-form-label" %>
-      <%= f.select :category_id, @categories.map {|c| [c.name, c.id]} %>
+      <%= f.select :category_id, @categories.map {|c| [format_text(c.name), c.id]} %>
     </div>
     <div class="field">
       <%= f.label :start_date, class: "col-sm-2 col-form-label" %>
@@ -28,9 +28,7 @@
       <%= f.label :picture, class: "col-md-2 col-form-label" %>
       <%= f.file_field :picture, accept: "image/png, image/jpg, image/jpeg" %>
     </div>
-    
-    
-    
+
     <div class="actions">
       <%= f.submit "Continue" %>
     </div>

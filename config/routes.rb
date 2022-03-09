@@ -25,8 +25,6 @@ Rails.application.routes.draw do
   delete 'options/:id', to: 'options#destroy', as: 'destroy_option'
 
   get 'payments/success/:id', to: 'payments#success', as: 'payments_success'
-  # post "payments/webhook", to: "payments#webhook"
-  # get 'payments', to: 'payments#index', as: 'payments'
+  post "payments/webhook", to: "payments#webhook"
   post 'payments', to: 'payments#support_session', as: 'support_session'
-  # post 'payments', to: 'payments#create_support_session', as: 'create_support_session'
 end

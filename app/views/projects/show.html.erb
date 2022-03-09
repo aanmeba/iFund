@@ -11,12 +11,15 @@
       <%= render "picture", temp: @project %>
     </div>
     <div class="col mt-5">
-      <h1><%= @project.title %></h1>
-      <h3>Goal: <%= @project.goal_amount %></h3>
+      <h1><%= format_text(@project.title) %></h1>
+      <h3><%= format_price(@project.total_amount) %> </h3>
+      <p>raised of <%= format_price(@project.goal_amount) %> goal</p>
+      <p><%= @total_supporters %> supporters</p>
       <p class="badge badge-pill badge-info"><%= @categories.find(@project.category_id).name %></p>
       <p>Start Date: <%= @project.start_date %></p>
       <p>Due Date: <%= @project.due_date %></p>
-      <p>D-<%= ((@project.due_date) - (@project.start_date)).to_i %></p>
+    
+      <p><%= ((@project.due_date) - (@project.start_date)).to_i %> days to go</p>
 
       <div>
         <%= form_with url: support_session_path(id: @project.id) do |f| %>
@@ -39,14 +42,6 @@
             %>
           </div>
         <% end %>
-<%#         
-        <%= button_to "Check Out",
-          support_session_path,
-          remote: true,
-          method: :post,
-          params: {id: @project.id, price: 6500},
-          class: "btn btn-primary",
-          data: {disable_with: "Loading..."} %>
       </div>
     </div>
     <div class="w-100"></div>
@@ -57,17 +52,6 @@
 
     <div class="col mt-5">
       <%= render "options/show" %>
-      
     </div>
   </div>
 </section>
-
-<script>
-  // let pay_btn = document.querySelectorAll('.btn');
-  // pay_btn.addEventListener('click', () => {
-  //   let get_price = document.getElementById('price').value;
-  //   console.log('clicked!!!!');
-  //   "<%= @project.amount %>": get_price;
-  // });
-  
-</script>
