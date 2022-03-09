@@ -15,3 +15,20 @@
  */
 
 @import 'bootstrap/scss/bootstrap';
+
+body {
+  .container{
+    height: auto;
+    min-height: 90vh;
+    padding-bottom: 15vh;
+  }
+}
+
+.footer {
+  height: 10vh;
+  position: relative;
+  transform: translateY(10%);
+  padding: 2.5rem 0;
+  margin-bottom: 5vh;
+  border-top: 0.05rem solid #e5e5e5;
+}
