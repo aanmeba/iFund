@@ -1,0 +1,14 @@
+
+  <% if temp.errors.any? %>
+    <div class="alert alert-danger alert-dismissable fade show mt-3">
+      <h5><%= pluralize(temp.errors.count, "error") %> prohibited this <%= name %> from being saved</h5>
+      <ul>
+        <% temp.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>

@@ -1,19 +1,7 @@
 
 <%= form_with model: @option do |f| %>
 
-    <% if @option.errors.any? %>
-    <div class="alert alert-danger alert-dismissable fade show mt-3">
-      <h5><%= pluralize(@option.errors.count, "error") %> prohibited this option from being saved</h5>
-      <ul>
-        <% @option.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-      <button type="button" class="close" data-dismiss="alert" aria-label="close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-  <% end %>
+  <%= render "shared/validation", temp: @option, name: "option" %>
 
   <h5>Option </h5>
   <div class="field">
