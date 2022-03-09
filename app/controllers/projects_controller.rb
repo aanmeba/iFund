@@ -40,7 +40,7 @@ class ProjectsController < ApplicationController
   def update
     @project.update(project_params)
     if @project.save
-      redirect_to @project, notice: "Project successfully updated"
+      redirect_to @project, notice: "#{@project.title.capitalize} is successfully updated"
     else
       set_form_vars
       render "edit", notice: "Something went wrong"
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path, notice: "#{@project.title} sucessfully deleted"
+    redirect_to projects_path, notice: "#{@project.title.capitalize} is sucessfully deleted"
   end
 
   private

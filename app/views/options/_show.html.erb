@@ -4,7 +4,7 @@
 <% end %>
 
 <% @option.each do |option| %>
-  <h5><%= option.title %></h5>
+  <h5><%= format_text(option.title) %></h5>
   <% if user_signed_in? && current_user.id == @project.user_id %>
     <%= link_to "Edit", edit_option_path(id: option.id), class: "mr-3" %>
     <%= link_to "Delete", destroy_option_path(option.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>

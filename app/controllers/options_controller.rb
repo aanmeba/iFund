@@ -27,15 +27,15 @@ class OptionsController < ApplicationController
   def update
     @option.update(option_params)
     if @option.save
-      redirect_to project_path(@project_id), notice: "#{@option.title} has been added"
+      redirect_to project_path(@project_id), notice: "#{@option.title.capitalize} option has been added"
     else
-      render "edit"
+      render edit_option_path(@project_id)
     end
   end
 
   def destroy
     @option.destroy
-    redirect_to project_path(@project_id), notice: "#{@option.title} sucessfully deleted"
+    redirect_to project_path(@project_id), notice: "#{@option.title.capitalize} option is sucessfully deleted"
   end
 
   private

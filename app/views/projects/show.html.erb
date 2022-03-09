@@ -6,18 +6,22 @@
     </div>
   <% end %>
   
+
+  <div class="row">
+    <div class="col mt-3">
+      <h2 class="text-center"><%= format_text(@project.title) %></h2>
+    </div>
+  </div>
   <div class="row">
     <div class="col mt-5">
       <%= render "picture", temp: @project %>
     </div>
     <div class="col mt-5">
-      <h1><%= format_text(@project.title) %></h1>
-      <h3><%= format_price(@project.total_amount) %> </h3>
+      <h3 class="font-weight-bold"><%= format_price(@project.total_amount) %> </h3>
       <p>raised of <%= format_price(@project.goal_amount) %> goal</p>
       <p><%= @total_supporters %> supporters</p>
       <p class="badge badge-pill badge-info"><%= @categories.find(@project.category_id).name %></p>
-      <p>Start Date: <%= @project.start_date %></p>
-      <p>Due Date: <%= @project.due_date %></p>
+      
     
       <p><%= ((@project.due_date) - (@project.start_date)).to_i %> days to go</p>
 
@@ -54,5 +58,6 @@
     <div class="col mt-5">
       <%= render "options/show" %>
     </div>
+    
   </div>
 </section>
