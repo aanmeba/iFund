@@ -36,3 +36,8 @@ References:
 ## remind - instance variable in Rails controller
 
 - https://stackoverflow.com/questions/36815383/understanding-rails-instance-variables
+
+## unsplash - api
+
+- https://github.com/unsplash/unsplash_rb
+
