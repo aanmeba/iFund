@@ -14,8 +14,6 @@ Rails.application.routes.draw do
   get 'projects/:id/edit', to: 'projects#edit', as: 'edit_project'
   delete 'projects/:id', to: 'projects#destroy', as: 'destroy_project'
   
-  # resources :rewards
-  get 'options', to: 'options#index', as: 'options'
   post 'options', to: 'options#create'
   get 'options/new', to: 'options#new', as: 'new_option'
   get 'options/:id', to: 'options#show', as: 'option'
