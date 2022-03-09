@@ -2,8 +2,8 @@
 <%= form_with model: @option do |f| %>
 
     <% if @option.errors.any? %>
-    <div class="alert alert-error alert-dismissable fade show">
-      <h3><%= pluralize(@option.errors.count, "error") %> prohibited this listing from being saved</h3>
+    <div class="alert alert-danger alert-dismissable fade show mt-3">
+      <h5><%= pluralize(@option.errors.count, "error") %> prohibited this option from being saved</h5>
       <ul>
         <% @option.errors.full_messages.each do |message| %>
           <li><%= message %></li>
