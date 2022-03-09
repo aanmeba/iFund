@@ -3,30 +3,15 @@
   <%= link_to "New Option", new_option_path(project_id: @project.id), class: "mr-3" %>
 <% end %>
 
-  <% @option.each do |option| %>
-    <h5><%= option.title %></h5>
-    <% if user_signed_in? && current_user.id == @project.user_id %>
-      <%= link_to "Edit", edit_option_path(id: option.id), class: "mr-3" %>
-      <%= link_to "Delete", destroy_option_path(option.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
-    <% end %>
-    <ul>
-      <li>Option ID: <%= option.id %></li>
-      <li>Amount: <%= option.amount %></li>
-      <li>Details: <%= option.description %></li>
-    </ul>
+<% @option.each do |option| %>
+  <h5><%= option.title %></h5>
+  <% if user_signed_in? && current_user.id == @project.user_id %>
+    <%= link_to "Edit", edit_option_path(id: option.id), class: "mr-3" %>
+    <%= link_to "Delete", destroy_option_path(option.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
   <% end %>
-
-  <% form_with url: check_out_path do |f| %>
-    <%= f.label :custume, "Customise your pledge:" %>
-    <%= f.text_field :custume %>
-    <%= f.submit "Support" %>
-  <% end %>
-
-  <%= button_to "SUPPORT",
-    check_out_path,
-    remote: true,
-    method: :post,
-    params: {id: @project.id},
-    class: "btn btn-primary",
-    data: {disable_with: "Loading..."} %>
-
+  <ul>
+    <li>Option ID: <%= option.id %></li>
+    <li>Amount: <%= option.amount %></li>
+    <li>Details: <%= option.description %></li>
+  </ul>
+<% end %>

@@ -21,28 +21,29 @@
     
       <p><%= ((@project.due_date) - (@project.start_date)).to_i %> days to go</p>
 
-      <div>
-        <%= form_with url: support_session_path(id: @project.id) do |f| %>
-          <div class="field">
-            <%= f.label :price, "Customise your pledge:" %>
-            <%= f.text_field :price %>
-          </div>
-
-          <% @option.each do |option| %>
+      <% if !user_signed_in? %>
+        <%= button_to "Login to Support", new_user_session_path, class: "btn btn-info" %>
+      <% else %>
+        <div>
+          <%= form_with url: support_session_path(id: @project.id) do |f| %>
             <div class="field">
-              <%= f.label :price, option.amount, class: "form-label mr-1" %>
-              <%= f.radio_button :price, option.amount, class: "mr-2" %>
+              <%= f.label :price, "Customise your pledge:" %>
+              <%= f.text_field :price %>
+            </div>
+
+            <% @option.each do |option| %>
+              <div class="field">
+                <%= f.label :price, option.amount, class: "form-label mr-1" %>
+                <%= f.radio_button :price, option.amount, class: "mr-2" %>
+              </div>
+            <% end %>
+
+            <div class="actions">
+              <%= f.button "Support", class: "btn btn-primary", data: {disable_with: "Loading..."} %>
             </div>
           <% end %>
-
-          <div class="actions">
-            <%= f.button "Support", 
-              class: "btn btn-primary",
-              data: {disable_with: "Loading..."}
-            %>
-          </div>
-        <% end %>
-      </div>
+        </div>
+      <% end %>
     </div>
     <div class="w-100"></div>
     

@@ -6,7 +6,7 @@
         <div class="card border-dark h-100">
           <%= render "picture", temp: project %>
           <div class="card-body">
-            <h5><%= project.title %></h5>
+            <h5><%= format_text(project.title) %></h5>
             <p class="badge badge-pill badge-info"><%= @categories.find(project.category_id).name %></p>
 
             <% if project.start_date <= Date.current && project.due_date > Date.current %>

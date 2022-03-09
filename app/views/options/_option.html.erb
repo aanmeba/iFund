@@ -1,10 +1,25 @@
 
 <%= form_with model: @option do |f| %>
 
+    <% if @option.errors.any? %>
+    <div class="alert alert-error alert-dismissable fade show">
+      <h3><%= pluralize(@option.errors.count, "error") %> prohibited this listing from being saved</h3>
+      <ul>
+        <% @option.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+      <button type="button" class="close" data-dismiss="alert" aria-label="close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  <% end %>
+
   <h5>Option </h5>
   <div class="field">
     <%= f.label :title, class: "col-sm-2 col-form-label" %>
     <%= f.text_field :title %>
+    <%= f.label :title, "Title should be one word", class: "text-muted" %>
   </div>
   <div class="field">
     <%= f.label :amount, class: "col-sm-2 col-form-label" %>
