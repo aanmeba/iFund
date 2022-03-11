@@ -41,12 +41,12 @@ class PaymentsController < ApplicationController
       header = request.headers['HTTP_STRIPE_SIGNATURE']
       secret = Rails.application.credentials.dig(:stripe, :webhook_signing_secret)
       event = Stripe::Webhook.construct_event(payload, header, secret)
-    # rescue Stripe::SignatureVerificationError => e 
-    #   render json: {error: "Unauthorised"}, status: 403
-    #   return 
-    # rescue JSON::ParserError => e
-    #   render json: {error: "Bad request"}, status: 422
-    #   return
+    rescue Stripe::SignatureVerificationError => e 
+      render json: {error: "Unauthorised"}, status: 403
+      return 
+    rescue JSON::ParserError => e
+      render json: {error: "Bad request"}, status: 422
+      return
     end
 
     payment_intent_id = event.data.object.payment_intent
