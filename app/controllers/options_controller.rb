@@ -29,7 +29,7 @@ class OptionsController < ApplicationController
     if @option.save
       redirect_to project_path(@project_id), notice: "#{@option.title.capitalize} option has been added"
     else
-      render edit_option_path(@project_id)
+      render "edit"
     end
   end
 
