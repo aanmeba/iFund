@@ -1,6 +1,7 @@
 <% if temp.picture.attached? %>
   <%= image_tag temp.picture, alt: temp.title, class: "thumbnail card-img top" %>
 <% else %>
-  <%= image_tag "default/default_#{@categories.find(temp.category_id).name}", alt: temp.title, class: "thumbnail card-img top" %>
+
+  <%= image_tag image_link(temp), alt: temp.title, class: "thumbnail card-img top" %>
   <%# no image yet %>
 <% end %>
