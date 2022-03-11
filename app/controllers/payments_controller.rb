@@ -5,7 +5,6 @@ class PaymentsController < ApplicationController
   def success
     @support = Support.find_by(project_id: params[:id])
     Project.update(total_amount: (@project.total_amount += @project.amount))
-    
   end
 
   def support_session
@@ -29,7 +28,7 @@ class PaymentsController < ApplicationController
           project_id: @project.id
         }
       },
-      success_url: "#{root_url}/payments/success/#{@project.id}",
+      success_url: "#{root_url}payments/success/#{@project.id}",
       cancel_url: root_url
     )
     

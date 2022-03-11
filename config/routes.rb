@@ -17,9 +17,9 @@ Rails.application.routes.draw do
   post 'options', to: 'options#create'
   get 'options/new', to: 'options#new', as: 'new_option'
   get 'options/:id', to: 'options#show', as: 'option'
-  get 'options/:id/edit', to: 'options#edit', as: 'edit_option'
   put 'options/:id', to: 'options#update'
   patch 'options/:id', to: 'options#update'
+  get 'options/:id/edit', to: 'options#edit', as: 'edit_option'
   delete 'options/:id', to: 'options#destroy', as: 'destroy_option'
 
   get 'payments/success/:id', to: 'payments#success', as: 'payments_success'

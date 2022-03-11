@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
   <%= form_with model: @project, local: true do |f| %>
 
   <%= render "shared/validation", temp: @project, name: "project" %>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="actions">
-      <%= f.submit "Continue" %>
+      <%= f.submit "Save" %>
     </div>
   <% end %>
 </div>

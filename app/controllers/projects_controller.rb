@@ -5,7 +5,7 @@ class ProjectsController < ApplicationController
   before_action :authorise_user, only: [:edit, :update, :destroy]
 
   def index
-    @projects = Project.all
+    @projects = Project.all.order(:id)
   end
   
   def new
