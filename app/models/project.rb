@@ -3,7 +3,8 @@ class Project < ApplicationRecord
   belongs_to :user
   has_many :option, dependent: :destroy
 
-  has_one_attached :picture
+  # has_one_attached :picture
+  has_one_attached :picture, service: :amazon
 
   validates :title, :description, :start_date, :due_date, :goal_amount, :category_id, presence: true
   validate :due_date_should_be_after_start_date  
