@@ -4,11 +4,17 @@ class PaymentsController < ApplicationController
   
   def success
     @support = Support.find_by(project_id: params[:id])
-    Project.update(total_amount: (@project.total_amount += @project.amount))
+    @project.update(total_amount: (@project.total_amount += @project.amount))
   end
 
   def support_session
-    @project.amount = params[:price]
+    # take the amount in cents
+    @project.amount = (params[:price].to_f) * 100
+    puts "*********************"
+    pp @project.id
+    pp @project.title
+    pp @project.amount
+    
 
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],
@@ -59,10 +65,13 @@ class PaymentsController < ApplicationController
     Support.create(project_id: project_id, organiser_id: @project.user_id, supporter_id: supporter_id, payment_id: payment_intent_id, receipt_url: payment.charges.data[0].receipt_url)
 
     # update Project to sum up the total amount
-    Project.update(amount: event.data.object.amount_total)
+    @project.update(amount: event.data.object.amount_total)
   end
 
   def set_project_params
     @project = Project.find(params[:id])
+    puts "*********************"
+    pp @project.id
+    pp @project.title
   end
 end
