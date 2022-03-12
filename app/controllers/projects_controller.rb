@@ -19,6 +19,9 @@ class ProjectsController < ApplicationController
       if current_user.type != "Organiser"
         current_user.update(type: "Organiser")
       end
+      # save the goal amount in cents in database
+      @project.goal_amount *= 100
+      pp "project goal amount: #{@project.goal_amount}"
       session[:project_id] = @project.id
       redirect_to new_option_path
 

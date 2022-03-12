@@ -1,6 +1,10 @@
 module ProjectsHelper
   def format_price(price)
-    "$#{(price/100.0)}"
+    "$#{(price/100)}"
+  end
+
+  def number_to_currency(number, options = {})
+    delegate_number_helper_method(:number_to_currency, number, options)
   end
 
   def image_link(temp)

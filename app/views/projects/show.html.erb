@@ -18,7 +18,7 @@
     </div>
     <div class="col mt-5">
       <h3 class="font-weight-bold"><%= format_price(@project.total_amount) %> </h3>
-      <p>raised of <%= format_price(@project.goal_amount) %> goal</p>
+      <p>raised of <%= number_to_currency(@project.goal_amount) %> goal</p>
       <p><%= @total_supporters %> supporters</p>
       <p class="badge badge-pill badge-info"><%= @categories.find(@project.category_id).name %></p>
       
@@ -31,8 +31,16 @@
         <div>
           <%= form_with url: support_session_path(id: @project.id) do |f| %>
             <div class="field">
-              <%= f.label :price, "Customise your pledge:" %>
-              <%= f.text_field :price %>
+              <%= f.label :price, "Customise your pledge:", class: "col-form-label" %>
+              <div class="field input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">$</span>
+                </div>
+                <%= f.text_field :price %>
+                <div class="input-group-append">
+                  <span class="input-group-text">.00</span>
+                </div>
+              </div>
             </div>
 
             <% @option.each do |option| %>

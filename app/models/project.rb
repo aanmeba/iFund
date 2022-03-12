@@ -1,7 +1,8 @@
 class Project < ApplicationRecord
   belongs_to :category
   belongs_to :user
-  has_many :option, dependent: :destroy
+  has_many :options, dependent: :destroy
+  has_many :supports, dependent: :destroy
 
   # has_one_attached :picture
   has_one_attached :picture, service: :amazon
