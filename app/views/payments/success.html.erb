@@ -1,6 +1,4 @@
-
 <div class="container mt-5">
-  <h3>Thank you for supporting <%= @support.project.title %> project!</h3>
-  <%= link_to "View Receipt", @support.receipt_url %>
-  Yey!
+  <h1 class="thanks">Thank you for supporting <span class="text-primary"><%= link_to @support.project.title, @project %></span> project!</h1>
+  <p class="text-center"><%= link_to "View Receipt", @support.receipt_url, target: :_blank %></p>
 </div>
