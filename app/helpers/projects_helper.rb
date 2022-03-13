@@ -7,6 +7,10 @@ module ProjectsHelper
     delegate_number_helper_method(:number_to_currency, number, options)
   end
 
+  def proj_progress(total, goal)
+    @result = total / goal.to_f * 100
+  end
+
   def image_link(temp)
     @base_url = "https://ja-ifund-rails-app.s3.ap-southeast-2.amazonaws.com/"
     @location = "default/default_"

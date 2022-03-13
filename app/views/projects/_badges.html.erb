@@ -1,0 +1,9 @@
+<p class="badge rounded-pill bg-info text-white"><%= @categories.find(temp.category_id).name %></p>
+
+<% if temp.start_date <= Date.current && temp.due_date > Date.current %>
+  <p class="badge rounded-pill bg-success text-white"><%= @statuses[0] %></p>
+<% elsif temp.start_date > Date.current && temp.due_date > Date.current %>
+  <p class="badge rounded-pill bg-primary text-white"><%= @statuses[1] %></p>
+<% else %>
+  <p class="badge rounded-pill bg-secondary text-white"><%= @statuses[2] %></p>
+<% end %>

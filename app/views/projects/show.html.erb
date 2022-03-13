@@ -5,7 +5,6 @@
       <%= link_to "Delete", destroy_project_path(@project.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
     </div>
   <% end %>
-  
 
   <div class="row">
     <div class="col mt-3">
@@ -17,13 +16,13 @@
       <%= render "picture", temp: @project %>
     </div>
     <div class="col mt-5">
-      <h3 class="font-weight-bold"><%= format_price(@project.total_amount) %> </h3>
+      <%= render "badges", temp: @project %>
+      <%= render "progress", temp: @project %>
+      <h3 class="font-weight-bold mt-3"><%= format_price(@project.total_amount) %> </h3>
       <p>raised of <%= number_to_currency(@project.goal_amount) %> goal</p>
-      <p><%= @total_supporters %> supporters</p>
-      <p class="badge badge-pill badge-info"><%= @categories.find(@project.category_id).name %></p>
-      
-    
-      <p><%= ((@project.due_date) - (@project.start_date)).to_i %> days to go</p>
+      <h3><%= @total_supporters %></h3> <p>supporters</p>
+
+      <h3><%= ((@project.due_date) - (@project.start_date)).to_i %></h3> <p>days to go</p>
 
       <% if !user_signed_in? %>
         <%= button_to "Login to Support", new_user_session_path, class: "btn btn-info" %>
