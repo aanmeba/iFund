@@ -1,3 +1,41 @@
 // Place all the styles related to the Projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.links {
+  display: flex; 
+  justify-content: flex-end;
+  span, a {
+    padding: 0.5rem;
+    margin-left: 0.5rem;
+  }
+}
+
+.align-box {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pledge-input {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+@media (max-width: 767.98px) {
+  #show-main-container {
+    display: block;
+  }
+}
+
+@media (max-width: 575.98px) { 
+  #nav {
+    display: flex;
+    flex-direction: column;
+  }
+  .links {
+    display: none;
+  }
+  #index-main-container {
+    display: block;
+  }
+}
