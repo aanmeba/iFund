@@ -1,3 +1,11 @@
 // Place all the styles related to the options controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.option-box {
+  display: flex;
+  justify-content: space-between;
+  h3, p {
+    margin-bottom: 0;
+  }
+}

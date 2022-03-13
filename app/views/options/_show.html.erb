@@ -1,17 +1,23 @@
-<h3>Options</h3>
-<% if user_signed_in? && current_user.id == @project.user_id %>
-  <%= link_to "New Option", new_option_path(project_id: @project.id), class: "mr-3" %>
-<% end %>
+<div class="option-box">
+  <h3>Options</h3>
+  <% if user_signed_in? && current_user.id == @project.user_id %>
+    <p><%= link_to "New Option", new_option_path(project_id: @project.id) %></p>
+  <% end %>
+</div>
+<hr class="divider-class">
 
 <% @option.each do |option| %>
-  <h5><%= format_text(option.title) %></h5>
-  <% if user_signed_in? && current_user.id == @project.user_id %>
-    <%= link_to "Edit", edit_option_path(id: option.id), class: "mr-3" %>
-    <%= link_to "Delete", destroy_option_path(option.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
-  <% end %>
+  <div class="option-box">
+    <h5><%= format_text(option.title) %></h5>
+    <div>
+      <% if user_signed_in? && current_user.id == @project.user_id %>
+        <%= link_to "Edit", edit_option_path(id: option.id), class: "mr-3" %>
+        <%= link_to "Delete", destroy_option_path(option.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
+      <% end %>
+    </div>
+  </div>
   <ul>
-    <li>Option ID: <%= option.id %></li>
-    <li>Amount: <%= option.amount %></li>
-    <li>Details: <%= option.description %></li>
+    <li>$<%= option.amount %></li>
+    <li><%= option.description %></li>
   </ul>
 <% end %>

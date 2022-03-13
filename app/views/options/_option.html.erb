@@ -1,23 +1,24 @@
+<div class="container mt-5">
+  <%= form_with model: @option do |f| %>
 
-<%= form_with model: @option do |f| %>
+    <%= render "shared/validation", temp: @option, name: "option" %>
 
-  <%= render "shared/validation", temp: @option, name: "option" %>
+    <div class="field input-group mb-3">
+      <%= f.label :title, class: "col-sm-2 col-form-label" %>
+      <%= f.text_field :title %>
+      <%= f.label :title, "Title should be one word. You can use underscore (_) instead of space", class: "text-muted" %>
+    </div>
+    <div class="field input-group mb-3">
+      <%= f.label :amount, class: "col-sm-2 col-form-label" %>
+      <%= f.text_field :amount %>
+    </div>
+    <div class="field input-group mb-3">
+      <%= f.label :description, class: "col-sm-2 col-form-label" %>
+      <%= f.text_area :description %>
+    </div>
 
-  <%# <h5>Option </h5> %>
-  <div class="field">
-    <%= f.label :title, class: "col-sm-2 col-form-label" %>
-    <%= f.text_field :title %>
-    <%= f.label :title, "Title should be one word", class: "text-muted" %>
-  </div>
-  <div class="field">
-    <%= f.label :amount, class: "col-sm-2 col-form-label" %>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :description, class: "col-sm-2 col-form-label" %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-      <%= f.submit "Save" %>
-  </div>
-<% end %>
+    <div class="actions ml-3">
+        <%= f.submit "Save" %>
+    </div>
+  <% end %>
+</div>

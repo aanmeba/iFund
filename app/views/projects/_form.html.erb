@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 align-self-center">
   <%= form_with model: @project, local: true do |f| %>
 
   <%= render "shared/validation", temp: @project, name: "project" %>
@@ -39,7 +39,7 @@
       <%= f.file_field :picture, accept: "image/png, image/jpg, image/jpeg" %>
     </div>
 
-    <div class="actions">
+    <div class="actions ml-3">
       <%= f.submit "Save" %>
     </div>
   <% end %>
