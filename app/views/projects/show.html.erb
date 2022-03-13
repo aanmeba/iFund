@@ -1,8 +1,8 @@
 <section class="container mt-5">
   <% if user_signed_in? && current_user.id == @project.user_id %>
-    <div class="links" style="display: flex; justify-content: flex-end;">
-      <%= link_to "Edit", edit_project_path(@project.id), class: "mr-3" %>
-      <%= link_to "Delete", destroy_project_path(@project.id), method: :delete, data: {confirm: "Are you sure?"}, class: "mr-3" %>
+    <div class="links">
+      <%= link_to "Edit", edit_project_path(@project.id) %>
+      <%= link_to "Delete", destroy_project_path(@project.id), method: :delete, data: {confirm: "Are you sure?"} %>
     </div>
   <% end %>
 
@@ -11,18 +11,16 @@
       <h2 class="text-center"><%= format_text(@project.title) %></h2>
     </div>
   </div>
-  <div class="row">
+  <div class="row" id="show-main-container">
     <div class="col mt-5">
       <%= render "picture", temp: @project %>
     </div>
     <div class="col mt-5">
       <%= render "badges", temp: @project %>
       <%= render "progress", temp: @project %>
-      <h3 class="font-weight-bold mt-3"><%= format_price(@project.total_amount) %> </h3>
-      <p>raised of <%= number_to_currency(@project.goal_amount) %> goal</p>
-      <h3><%= @total_supporters %></h3> <p>supporters</p>
-
-      <h3><%= ((@project.due_date) - (@project.start_date)).to_i %></h3> <p>days to go</p>
+      <h3 class="font-weight-bold mt-3"><%= format_currency(@project.total_amount) %> </h3>
+      <p>raised of <%= format_currency(@project.goal_amount) %> goal</p>
+      <h3><%= @total_supporters %></h3><p><%= "supporter".pluralize(@total_supporters) %></p>
 
       <% if !user_signed_in? %>
         <%= button_to "Login to Support", new_user_session_path, class: "btn btn-info" %>
@@ -31,13 +29,13 @@
           <%= form_with url: support_session_path(id: @project.id) do |f| %>
             <div class="field">
               <%= f.label :price, "Customise your pledge:", class: "col-form-label" %>
-              <div class="field input-group mb-3">
+              <div class="field input-group-sm mb-3 pledge-input">
                 <div class="input-group-prepend">
-                  <span class="input-group-text">$</span>
+                  <span class="input-group-text" id="inputGroup-sizing-sm">$</span>
                 </div>
                 <%= f.text_field :price %>
                 <div class="input-group-append">
-                  <span class="input-group-text">.00</span>
+                  <span class="input-group-text" id="inputGroup-sizing-sm">.00</span>
                 </div>
               </div>
             </div>
