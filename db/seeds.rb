@@ -29,10 +29,10 @@ if Project.count == 0
       title: Faker::Movie.title,
       description: Faker::Lorem.paragraph_by_chars(number: 456, supplemental: false),
       start_date: Faker::Date.between(from: 1.months.ago, to: 2.days.from_now),
-      due_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
+      due_date: Faker::Date.between(from: Date.today, to: 3.months.from_now),
       category_id: rand(1..6),
       user_id: 1,
-      goal_amount: ("#{rand(1..9)}" + ("0"*rand(3..6))).to_i
+      goal_amount: ("#{rand(1..9)}" + ("0"*rand(3..4))).to_i
     )
     puts "created a project"
   end

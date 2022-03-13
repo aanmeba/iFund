@@ -1,14 +1,18 @@
 module ProjectsHelper
-  def format_price(price)
-    "$#{(price/100)}"
-  end
-
-  def number_to_currency(number, options = {})
-    delegate_number_helper_method(:number_to_currency, number, options)
+  def format_currency(value)
+    number_to_currency(value/100, delimiter: ",", separator: ".")
   end
 
   def proj_progress(total, goal)
     @result = total / goal.to_f * 100
+  end
+
+  def format_text(text)
+    text.split("_").map {|word| word.capitalize}.join(" ")
+  end
+
+  def days_to_go(start, due)
+    @day_left = (start - due).to_i
   end
 
   def image_link(temp)

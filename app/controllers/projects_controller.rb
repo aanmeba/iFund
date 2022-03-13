@@ -5,7 +5,14 @@ class ProjectsController < ApplicationController
   before_action :authorise_user, only: [:edit, :update, :destroy]
 
   def index
-    @projects = Project.all.order(:id)
+    case params[:sort]
+    when "ending soon"
+      @projects = Project.all.order(:due_date)
+    when "need your support"
+      @projects = Project.all.order(total_amount: :asc)
+    else
+      @projects = Project.all.order(:id)
+    end
   end
   
   def new
@@ -20,11 +27,13 @@ class ProjectsController < ApplicationController
         current_user.update(type: "Organiser")
       end
       # save the goal amount in cents in database
-      @project.goal_amount *= 100
+      goal = @project.goal_amount
+      @project.update(goal_amount: goal * 100)
+      puts "***************************"
       pp "project goal amount: #{@project.goal_amount}"
+
       session[:project_id] = @project.id
       redirect_to new_option_path
-
     else
       render "new", notice: "Something went wrong"
     end
