@@ -1,7 +1,7 @@
 <% if temp.picture.attached? %>
-  <%= image_tag temp.picture, alt: temp.title, class: "thumbnail card-img top" %>
+  <%= image_tag temp.picture, alt: temp.title, class: "thumbnail card-img top img-fluid" %>
 <% else %>
 
-  <%= image_tag image_link(temp), alt: temp.title, class: "thumbnail card-img top" %>
+  <%= image_tag image_link(temp), alt: temp.title, class: "thumbnail card-img top img-fluid" %>
   <%# no image yet %>
 <% end %>
