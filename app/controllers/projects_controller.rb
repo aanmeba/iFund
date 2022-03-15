@@ -49,8 +49,8 @@ class ProjectsController < ApplicationController
 
   def update
     @project.update(project_params)
-    set_goal_amount_in_cents
     if @project.save
+      set_goal_amount_in_cents
       redirect_to @project, notice: "#{@project.title.capitalize} is successfully updated"
     else
       set_form_vars
@@ -80,7 +80,7 @@ class ProjectsController < ApplicationController
 
   def set_form_vars
     @categories = Category.all
-    @statuses = ["ongoing", "upcoming", "completed"]
+    # @statuses = ["ongoing", "upcoming", "completed"]
     @options = Option.all
   end
 
