@@ -6,7 +6,7 @@
     <div class="field input-group mb-3">
       <%= f.label :title, class: "col-sm-2 col-form-label" %>
       <%= f.text_field :title %>
-      <%= f.label :title, "Title should be one word. You can use underscore (_) instead of space", class: "text-muted" %>
+      <%= f.label :title %>
     </div>
     <div class="field input-group mb-3">
       <%= f.label :amount, class: "col-sm-2 col-form-label" %>
@@ -19,6 +19,13 @@
 
     <div class="actions ml-3">
         <%= f.submit "Save" %>
+
+        <%# logic for "Skip" or "Back" link when creating an option %>
+        <% if !params[:project_id] %>
+          <%= link_to "Skip", projects_path, class: "ml-3" %>
+        <% else %>
+          <%= link_to "Back", project_path(params[:project_id]), class: "ml-3" %>
+        <% end %>
     </div>
   <% end %>
 </div>
