@@ -20,10 +20,14 @@
         <%= f.submit "Save" %>
 
         <%# logic for "Skip" or "Back" link when creating an option %>
-        <% if !params[:project_id] %>
-          <%= link_to "Skip", project_path(@project_id), class: "ml-3" %>
-        <% else %>
-          <%= link_to "Back", project_path(params[:project_id]), class: "ml-3" %>
+        <% if !params[:project_id].nil? && !session[:project_id].nil? %>
+          <%= link_to "Back", project_path(@project_id), class: "ml-3" %>
+        <% elsif !@project_id.nil? && params[:project_id].nil? %>
+          <% if @option.id.nil? %>
+            <%= link_to "Skip", project_path(@project_id), class: "ml-3" %>
+          <% else %>
+            <%= link_to "Back", project_path(@project_id), class: "ml-3" %>
+          <% end %>
         <% end %>
     </div>
   <% end %>

@@ -1,7 +1,7 @@
 class OptionsController < ApplicationController
   # this controller is for manipulating options
   
-  before_action :set_project_id, only: [:new, :create, :update, :destroy]
+  before_action :set_project_id, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_option, only: [:show, :edit, :update, :destroy]
 
   def show
@@ -9,6 +9,13 @@ class OptionsController < ApplicationController
 
   def new
     @option = Option.new
+    puts "****************!!!!*******************"
+    pp @project_id.nil?
+    pp @option.nil?
+    pp @option.id.nil?
+    pp @option.project_id.nil?
+    pp params
+    pp @option
   end
 
   def create
@@ -22,6 +29,11 @@ class OptionsController < ApplicationController
   end
 
   def edit
+    puts "+++++++++++++++++++++++++++++++++++++++"
+    pp params[:project_id].nil?
+    pp params[:project_id]
+    pp @option.project_id
+    pp @project_id.nil? 
   end
 
   def update
@@ -49,6 +61,11 @@ class OptionsController < ApplicationController
   end
 
   def set_project_id
-    @project_id = session[:project_id]
+    puts "(((((((((((((((())))))))))))))))))"
+    pp session[:project_id]
+    pp params[:project_id]
+    if session[:project_id] || params[:project_id]
+      @project_id = session[:project_id]
+    end
   end
 end

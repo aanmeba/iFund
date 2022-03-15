@@ -30,6 +30,10 @@ class ProjectsController < ApplicationController
       set_goal_amount_in_cents
       
       session[:project_id] = @project.id
+      puts "***********************"
+      pp params
+      pp session[:project_id]
+      pp @project
       redirect_to new_option_path
     else
       render "new", notice: "Something went wrong"
