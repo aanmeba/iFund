@@ -1,7 +1,14 @@
 module ApplicationHelper
 
+  # Use it in projects and options controllers
   def format_text(text)
-    text.capitalize
+    if text.include?(" ")
+      text.split(" ").map {|word| word.capitalize}.join(" ")
+    elsif text.include?("_")
+      text.split("_").map {|word| word.capitalize}.join(" ")
+    else
+      text.capitalize
+    end
   end
 
   def select_alert_subclass(input)

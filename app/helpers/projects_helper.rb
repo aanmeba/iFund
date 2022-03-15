@@ -7,14 +7,12 @@ module ProjectsHelper
     @result = total / goal.to_f * 100
   end
 
-  def format_text(text)
-    text.split("_").map {|word| word.capitalize}.join(" ")
-  end
-
   def days_to_go(start, due)
     @day_left = (start - due).to_i
   end
 
+  # generate image link for accessing images in AWS S3 bucket 
+  # or local active storage depending on the environment
   def image_link(temp)
     @base_url = "https://ja-ifund-rails-app.s3.ap-southeast-2.amazonaws.com/"
     @location = "default/default_"
