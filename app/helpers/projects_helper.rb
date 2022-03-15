@@ -1,4 +1,5 @@
 module ProjectsHelper
+  # method for displaying currency
   def format_currency(value)
     number_to_currency(value/100, delimiter: ",", separator: ".")
   end
