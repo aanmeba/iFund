@@ -49,6 +49,7 @@
 
             <div class="actions">
               <%= f.button "Support", class: "btn btn-primary", data: {disable_with: "Loading..."} %>
+              <%= link_to "Uncheck the option", project_path(@project.id), class: "ml-3" %>
             </div>
           <% end %>
         </div>
