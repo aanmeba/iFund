@@ -6,3 +6,7 @@
 - https://www.youtube.com/watch?v=3F0BQLsGTJA
 - make bucket and account public
 - set the objects (images) pubic using ACLs
+
+## reset heroku app db
+https://gist.github.com/zulhfreelancer/ea140d8ef9292fa9165e
+
