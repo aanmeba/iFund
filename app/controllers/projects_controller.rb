@@ -29,9 +29,7 @@ class ProjectsController < ApplicationController
       # save the goal amount in cents in database
       goal = @project.goal_amount
       @project.update(goal_amount: goal * 100)
-      puts "***************************"
-      pp "project goal amount: #{@project.goal_amount}"
-
+      
       session[:project_id] = @project.id
       redirect_to new_option_path
     else
@@ -65,10 +63,6 @@ class ProjectsController < ApplicationController
   end
 
   private
-
-  def data_summary
-  
-  end
 
   def project_params
     params.require(:project).permit(:title, :category_id, :start_date, :due_date, :goal_amount, :description, :picture)
