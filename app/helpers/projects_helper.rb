@@ -8,8 +8,14 @@ module ProjectsHelper
     @result = total / goal.to_f * 100
   end
 
-  def days_to_go(start, due)
-    @day_left = (start - due).to_i
+  def days_to_go(date)
+    if date > Date.current
+      @day_left = (date - Date.current).to_i
+    else
+      @day_left = 0
+    end
+    pp @day_left
+    return @day_left
   end
 
   def set_status(project)

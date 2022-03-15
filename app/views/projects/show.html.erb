@@ -31,8 +31,11 @@
       <%# logic for payment button %>
       <% if !user_signed_in? %>
         <%= button_to "Login to Support", new_user_session_path, class: "btn btn-info" %>
-      <% elsif !@project.status %>
-        <div class="alert alert-info">This project will open in <%= days_to_go(@project.start_date, Date.current) %> <%= "day".pluralize(@day_left) %></div>
+      <% elsif !@project.status && @project.start_date > Date.current %>
+        <div class="alert alert-info">This project will open in <%= days_to_go(@project.start_date) %> <%= "day".pluralize(@day_left) %></div>
+      <% elsif !@project.status && @project.due_date <= Date.current %>
+        <div class="alert alert-info">This project was closed</div>
+      
       <% else %>
         <div>
           <%# input field for custom amount %>

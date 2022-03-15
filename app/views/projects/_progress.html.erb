@@ -4,7 +4,7 @@
   </div>
   <div class="align-box">
     <p class="text-primary"><%= "0%" %></p>
-    <p class="text-muted"><%= days_to_go(temp.due_date, temp.start_date) %> <%= "day".pluralize(@day_left) %> to go</p>
+    <%= render "days_to_go", temp: temp %>
   </div>  
 <% else %>
   <div class="progress">
@@ -12,6 +12,6 @@
   </div>
   <div class="align-box">
     <p class="text-primary"><%= "#{@result.round}%" %></p>
-    <p class="text-muted"><%= days_to_go(temp.due_date, temp.start_date) %> <%= "day".pluralize(@day_left) %> to go</p>
+    <%= render "days_to_go", temp: temp %>
   </div>
 <% end %>
