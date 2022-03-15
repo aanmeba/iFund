@@ -38,3 +38,9 @@ body {
   border-top: 2px solid #000;
   border-radius: 2px;
 }
+
+@media (max-width: 575.98px) { 
+  html {
+    font-size: 12px;
+  }
+}
