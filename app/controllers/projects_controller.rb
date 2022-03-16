@@ -5,10 +5,11 @@ class ProjectsController < ApplicationController
   before_action :authorise_user, only: [:edit, :update, :destroy]
 
   def index
+    @sorting = ["create date", "ending soon", "need your support"]
     case params[:sort]
-    when "ending soon"
+    when "1"
       @projects = Project.order(:due_date).includes(:category)
-    when "need your support"
+    when "2"
       @projects = Project.order(total_amount: :asc).includes(:category)
     else
       @projects = Project.order(:id).includes(:category)
@@ -84,7 +85,6 @@ class ProjectsController < ApplicationController
 
   def set_form_vars
     @categories = Category.all
-    # @statuses = ["ongoing", "upcoming", "completed"]
     @options = Option.all
   end
 

@@ -6,18 +6,23 @@
     <div class="field input-group mb-3">
       <%= f.label :title, class: "col-sm-2 col-form-label" %>
       <%= f.text_field :title %>
+      <%= f.label :title, "required", class: "text-muted col-sm-2 col-form-label" %>
+
     </div>
     <div class="field input-group mb-3">
       <%= f.label :category_id, class: "col-sm-2 col-form-label" %>
       <%= f.select :category_id, @categories.map {|c| [format_text(c.name), c.id]} %>
+      <%= f.label :category_id, "required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
     <div class="field input-group mb-3">
       <%= f.label :start_date, class: "col-sm-2 col-form-label" %>
       <%= f.date_field :start_date %>
+      <%= f.label :start_date, "required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
     <div class="field input-group mb-3">
       <%= f.label :due_date, class: "col-sm-2 col-form-label" %>
       <%= f.date_field :due_date %>
+      <%= f.label :due_date, "required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
     <div class="field input-group mb-3">
       <%= f.label :goal_amount, class: "col-sm-2 col-form-label" %>
@@ -28,11 +33,13 @@
       <div class="input-group-append">
         <span class="input-group-text">.00</span>
       </div>
+      <%= f.label :goal_amount, "required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
     
     <div class="field input-group mb-3">
       <%= f.label :description, class: "col-md-2 col-form-label" %>
       <%= f.text_area :description, size: "40x5" %>
+      <%= f.label :description, "required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
     <div class="field input-group mb-3">
       <%= f.label :picture, class: "col-md-2 col-form-label" %>

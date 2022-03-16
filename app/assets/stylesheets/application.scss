@@ -33,8 +33,18 @@ body {
   border-top: 0.05rem solid #e5e5e5;
 }
 
-
 .divider-class {
   border-top: 2px solid #000;
   border-radius: 2px;
 }
+
+// .field_with_errors {
+//   display: inline-block;
+//   margin: 0;
+//   &::before, &::after {
+//     display: inline-block;
+//     clear: none;
+//   }
+// }
+
+.field_with_errors { display: inline; }

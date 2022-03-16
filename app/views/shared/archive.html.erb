@@ -1,9 +1,10 @@
+<%# Project card - See More button %>
 <div class="d-flex justify-content-between mt-3">
   <%= link_to "See More", project_path(project.id), class: "btn btn-outline-primary" %>
   <h5>D-<%= ((project.due_date) - (project.start_date)).to_i</h5> %>
 </div>
 
-
+<%# Progress bar %>
 <div class="progress">
   <% if proj_progress(temp.total_amount, temp.goal_amount) == 0 %>
     <div class="progress-bar text-muted" role="progressbar" style="width: 100%; background-color: #e9ecef;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="0"><%= "0%" %></div>
@@ -14,7 +15,7 @@
   <% end %>
 </div>
 
-
+<%# Status %>
 <% if temp.start_date <= Date.current && temp.due_date > Date.current %>
   <p class="badge rounded-pill bg-success text-white"><%= @statuses[0] %></p>
   <% temp.status = true %>
@@ -23,3 +24,8 @@
 <% else %>
   <p class="badge rounded-pill bg-secondary text-white"><%= @statuses[2] %></p>
 <% end %>
+
+<%# Sorting %>
+<span>Sort: </span>
+<%= link_to "#{format_text("ending soon")}", sort: "ending soon", class: "mr-3 ml-3" %>
+<%= link_to "#{format_text("need your support")}", sort: "need your support", class: "mr-3 ml-3" %>
