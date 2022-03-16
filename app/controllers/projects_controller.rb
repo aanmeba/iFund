@@ -7,11 +7,11 @@ class ProjectsController < ApplicationController
   def index
     case params[:sort]
     when "ending soon"
-      @projects = Project.all.order(:due_date)
+      @projects = Project.order(:due_date).includes(:category)
     when "need your support"
-      @projects = Project.all.order(total_amount: :asc)
+      @projects = Project.order(total_amount: :asc).includes(:category)
     else
-      @projects = Project.all.order(:id)
+      @projects = Project.order(:id).includes(:category)
     end
   end
   
