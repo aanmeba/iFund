@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
         current_user.update(type: "Organiser")
       end
       # save the goal amount in cents in database
-      set_goal_amount_in_cents
+      # set_goal_amount_in_cents
       
       session[:project_id] = @project.id
       puts "***********************"
@@ -49,13 +49,13 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project.update(goal_amount: @project.goal_amount / 100)
+    # @project.update(goal_amount: @project.goal_amount / 100)
   end
 
   def update
     @project.update(project_params)
     if @project.save
-      set_goal_amount_in_cents
+      # set_goal_amount_in_cents
       redirect_to @project, notice: "#{@project.title.capitalize} is successfully updated"
     else
       set_form_vars
@@ -78,10 +78,10 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
   end
 
-  def set_goal_amount_in_cents
-    goal = @project.goal_amount
-    @project.update(goal_amount: goal * 100)
-  end
+  # def set_goal_amount_in_cents
+  #   goal = @project.goal_amount
+  #   @project.update(goal_amount: goal * 100)
+  # end
 
   def set_form_vars
     @categories = Category.all
