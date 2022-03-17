@@ -6,40 +6,49 @@
     <div class="field input-group mb-3">
       <%= f.label :title, class: "col-sm-2 col-form-label" %>
       <%= f.text_field :title %>
-      <%= f.label :title, "required", class: "text-muted col-sm-2 col-form-label" %>
+      <%= f.label :title, "Required", class: "text-muted col-sm-2 col-form-label" %>
 
     </div>
     <div class="field input-group mb-3">
       <%= f.label :category_id, class: "col-sm-2 col-form-label" %>
       <%= f.select :category_id, @categories.map {|c| [format_text(c.name), c.id]} %>
-      <%= f.label :category_id, "required", class: "text-muted col-sm-2 col-form-label" %>
+      <%= f.label :category_id, "Required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
     <div class="field input-group mb-3">
       <%= f.label :start_date, class: "col-sm-2 col-form-label" %>
       <%= f.date_field :start_date %>
-      <%= f.label :start_date, "required", class: "text-muted col-sm-2 col-form-label" %>
+      <%= f.label :start_date, "Required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
     <div class="field input-group mb-3">
       <%= f.label :due_date, class: "col-sm-2 col-form-label" %>
       <%= f.date_field :due_date %>
-      <%= f.label :due_date, "required", class: "text-muted col-sm-2 col-form-label" %>
+      <%= f.label :due_date, "Required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
-    <div class="field input-group mb-3">
-      <%= f.label :goal_amount, class: "col-sm-2 col-form-label" %>
-      <div class="input-group-prepend">
-        <span class="input-group-text">$</span>
+
+    <% if !@project.goal_amount.nil? && @project.goal_amount != 0 %>
+      <div class="field input-group mb-3">
+        <%= f.label :goal_amount, class: "col-sm-2 col-form-label" %>
+        <%= f.text_field :goal_amount, readonly: true %>
+        <%= f.label :goal_amount, "You can't edit the goal amount", class: "text-muted col-sm col-form-label" %>
       </div>
-      <%= f.text_field :goal_amount %>
-      <div class="input-group-append">
-        <span class="input-group-text">.00</span>
+    <% else %>
+      <div class="field input-group mb-3">
+        <%= f.label :goal_amount, class: "col-sm-2 col-form-label" %>
+        <div class="input-group-prepend">
+          <span class="input-group-text">$</span>
+        </div>
+        <%= f.text_field :goal_amount %>
+        <div class="input-group-append">
+          <span class="input-group-text">.00</span>
+        </div>
+        <%= f.label :goal_amount, "Required, you can't edit it after saving", class: "text-muted col-sm col-form-label" %>
       </div>
-      <%= f.label :goal_amount, "required", class: "text-muted col-sm-2 col-form-label" %>
-    </div>
+    <% end %>
     
     <div class="field input-group mb-3">
       <%= f.label :description, class: "col-md-2 col-form-label" %>
       <%= f.text_area :description, size: "40x5" %>
-      <%= f.label :description, "required", class: "text-muted col-sm-2 col-form-label" %>
+      <%= f.label :description, "Required", class: "text-muted col-sm-2 col-form-label" %>
     </div>
     <div class="field input-group mb-3">
       <%= f.label :picture, class: "col-md-2 col-form-label" %>
