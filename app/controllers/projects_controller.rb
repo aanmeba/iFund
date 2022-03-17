@@ -27,8 +27,6 @@ class ProjectsController < ApplicationController
       if current_user.type != "Organiser"
         current_user.update(type: "Organiser")
       end
-      # save the goal amount in cents in database
-      # set_goal_amount_in_cents
       
       session[:project_id] = @project.id
       puts "***********************"
@@ -49,7 +47,6 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    # @project.update(goal_amount: @project.goal_amount / 100)
   end
 
   def update
@@ -77,11 +74,6 @@ class ProjectsController < ApplicationController
   def set_project
     @project = Project.find(params[:id])
   end
-
-  # def set_goal_amount_in_cents
-  #   goal = @project.goal_amount
-  #   @project.update(goal_amount: goal * 100)
-  # end
 
   def set_form_vars
     @categories = Category.all
