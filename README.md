@@ -8,5 +8,9 @@
 - set the objects (images) pubic using ACLs
 
 ## reset heroku app db
+
 https://gist.github.com/zulhfreelancer/ea140d8ef9292fa9165e
 
+# dropdown sorting
+
+https://medium.com/swlh/creating-a-sort-drop-down-using-form-with-5b2de4261f2a
