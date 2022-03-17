@@ -14,7 +14,6 @@ module ProjectsHelper
     else
       @day_left = 0
     end
-    pp @day_left
     return @day_left
   end
 
@@ -58,7 +57,7 @@ module ProjectsHelper
         @base_url + @location + @key + @extension
       end  
     rescue => exception
-      "#"
+      redirect_to root_url, notice: "something went wrong to load images"
     end
 
   end
