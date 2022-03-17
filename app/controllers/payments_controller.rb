@@ -15,30 +15,33 @@ class PaymentsController < ApplicationController
     pp @project.title
     pp @project.amount
     
-
-    session = Stripe::Checkout::Session.create(
-      payment_method_types: ['card'],
-      customer_email: current_user && current_user.email,
-      line_items: [
-        {
-          name: @project.title,
-          description: @project.description,
-          amount: @project.amount,
-          currency: 'aud',
-          quantity: 1
-        }
-      ],
-      payment_intent_data: {
-        metadata: {
-          user_id: current_user && current_user.id,
-          project_id: @project.id
-        }
-      },
-      success_url: "#{root_url}payments/success/#{@project.id}",
-      cancel_url: root_url
-    )
-    
-    @session_id = session.id
+    begin
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        customer_email: current_user && current_user.email,
+        line_items: [
+          {
+            name: @project.title,
+            description: @project.description,
+            amount: @project.amount,
+            currency: 'aud',
+            quantity: 1
+          }
+        ],
+        payment_intent_data: {
+          metadata: {
+            user_id: current_user && current_user.id,
+            project_id: @project.id
+          }
+        },
+        success_url: "#{root_url}payments/success/#{@project.id}",
+        cancel_url: root_url
+      )
+      
+      @session_id = session.id
+    rescue Stripe::InvalidRequestError => e
+      redirect_to project_path(@project.id), notice: "Please enter the amount you want to support"
+    end
   end
 
   def webhook
