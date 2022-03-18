@@ -65,7 +65,7 @@ class PaymentsController < ApplicationController
     supporter_id = payment.metadata.user_id
     
     # create Support entry and track extra info
-    Support.create(project_id: project_id, organiser_id: @project.user_id, supporter_id: supporter_id, payment_id: payment_intent_id, receipt_url: payment.charges.data[0].receipt_url)
+    Support.create(project_id: project_id, supporter_id: supporter_id, payment_id: payment_intent_id, receipt_url: payment.charges.data[0].receipt_url)
 
     # update Project to sum up the total amount
     @project.update(amount: event.data.object.amount_total)

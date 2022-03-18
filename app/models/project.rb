@@ -1,17 +1,30 @@
 class Project < ApplicationRecord
   belongs_to :category
   belongs_to :user
+
+  # dependent: -> to avoid orphoned records
   has_many :options, dependent: :destroy
   has_many :supports, dependent: :destroy
 
-  # has_one_attached :picture
   has_one_attached :picture, service: :amazon
 
-  before_validation :dollar_to_cents
-
+  # validations
   validates :title, :description, :start_date, :due_date, :goal_amount, :category_id, presence: true
   validate :due_date_should_be_after_start_date  
-  validates :goal_amount, numericality: { only_integer: true }
+  
+  # goal amount
+  validates :goal_amount, numericality: { only_integer: true }, length: { maximum: 8, message: "is too big (maximum 6 digits)" }
+  
+  # sanitise the input data
+  before_save :remove_whitespace
+  before_validation :dollar_to_cents, if: :goal_amount_changed?
+
+  private
+
+  def remove_whitespace
+    self.title = self.title.strip
+    self.description = self.description.strip
+  end
 
   def dollar_to_cents
     if !goal_amount.nil? && goal_amount != 0

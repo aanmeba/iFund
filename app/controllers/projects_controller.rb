@@ -29,10 +29,8 @@ class ProjectsController < ApplicationController
       end
       
       session[:project_id] = @project.id
-      puts "***********************"
-      pp params
-      pp session[:project_id]
-      pp @project
+      puts "********* Projects_controller - Create **************"
+      pp @project.goal_amount # before_validation input * 100
       redirect_to new_option_path
     else
       render "new", notice: "Something went wrong"
@@ -53,6 +51,8 @@ class ProjectsController < ApplicationController
     @project.update(project_params)
     if @project.save
       # set_goal_amount_in_cents
+      puts "********* Projects_controller - Update **************"
+      pp @project.goal_amount
       redirect_to @project, notice: "#{@project.title.capitalize} is successfully updated"
     else
       set_form_vars
