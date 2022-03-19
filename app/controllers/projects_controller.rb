@@ -39,9 +39,9 @@ class ProjectsController < ApplicationController
 
   def show
     @option = @options.where(project_id: @project.id)
-    session[:project_id] = @project.id
     @total_supporters = Support.where(project_id: @project.id).count
-
+    #
+    session[:project_id] = @project.id
   end
 
   def edit

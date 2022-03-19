@@ -1,11 +1,5 @@
 module ProjectsHelper
-  # method for displaying currency
-  def format_currency(value)
-    number_to_currency(value/100, delimiter: ",", separator: ".")
-    puts "********* Projects_heler - format_currency **************"
-    pp value
-    pp number_to_currency(value/100, delimiter: ",", separator: ".")
-  end
+  
 
   def proj_progress(total, goal)
     puts "********* Projects_heler - proj_progress **************"
