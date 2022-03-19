@@ -8,11 +8,14 @@ class ProjectsController < ApplicationController
     @sorting = ["create date", "ending soon", "need your support"]
     case params[:sort]
     when "1"
-      @projects = Project.order(:due_date).includes(:category)
+      # @projects = Project.order(:due_date).includes(:category).includes(picture_attachment: :blob)
+      @projects = Project.order(:due_date).includes(:category, picture_attachment: :blob)
     when "2"
-      @projects = Project.order(total_amount: :asc).includes(:category)
+      # @projects = Project.order(total_amount: :asc).includes(:category).includes(picture_attachment: :blob)
+      @projects = Project.order(total_amount: :asc).includes(:category, picture_attachment: :blob)
     else
-      @projects = Project.order(:id).includes(:category)
+      # @projects = Project.order(:id).includes(:category).includes(picture_attachment: :blob)
+      @projects = Project.order(:id).includes(:category, picture_attachment: :blob)
     end
   end
   

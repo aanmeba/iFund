@@ -24,6 +24,7 @@ module ProjectsHelper
     return @day_left
   end
 
+  # status should be verified everytime to load the pages
   def set_status(project)
     statuses = ["ongoing", "upcoming", "completed"]
     if project.start_date <= Date.current && project.due_date > Date.current
