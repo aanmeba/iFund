@@ -17,7 +17,7 @@
     </div>
   </div>
   <ul>
-    <li>$<%= option.amount %></li>
-    <li><%= option.description.capitalize %></li>
+    <li><%= format_currency(option.amount) %></li>
+    <li><%= safe_join(option.description.capitalize.split("\r\n"), tag(:br)) %></li>
   </ul>
 <% end %>
