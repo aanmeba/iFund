@@ -4,6 +4,9 @@ class Option < ApplicationRecord
   validates :title, :description, :amount, presence: true
   validates :amount, numericality: { only_integer: true }
 
+  # sanitise the input data
+  before_save :remove_whitespace
+
   private
 
   def validate_amount
@@ -12,4 +15,8 @@ class Option < ApplicationRecord
     end
   end
 
+  def remove_whitespace
+    self.title = self.title.strip
+    self.description = self.description.strip
+  end
 end

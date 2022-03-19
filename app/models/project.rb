@@ -13,8 +13,9 @@ class Project < ApplicationRecord
   validate :due_date_should_be_after_start_date  
   validates :goal_amount, numericality: { only_integer: true }, length: { maximum: 8, message: "is too big (maximum 6 digits)" }
 
-  # sanitise data
+  # sanitise the input data
   before_save :coder_easter_egg
+  before_save :remove_whitespace
   before_validation :dollar_to_cents, if: :goal_amount_changed?
 
   private
@@ -38,5 +39,10 @@ class Project < ApplicationRecord
   def coder_easter_egg
     self.title = self.title.gsub(/welcome/i, "👻")
     self.description = self.description.gsub(/welcome/i, "👻")
+  end
+
+  def remove_whitespace
+    self.title = self.title.strip
+    self.description = self.description.strip
   end
 end
