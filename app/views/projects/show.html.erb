@@ -57,7 +57,7 @@
             <% @option.each do |option| %>
               <div class="field">
                 <%= f.radio_button :price, option.amount, class: "mr-2" %>
-                <%= f.label :price, "#{format_text(option.title)} - $#{option.amount}", class: "form-label mr-1" %>
+                <%= f.label :price, "#{format_text(option.title)} - $#{format_currency(option.amount)}", class: "form-label mr-1" %>
               </div>
             <% end %>
 
@@ -79,7 +79,7 @@
         <h3>Description</h3>
       </div>
       <hr class="divider-class">
-      <p><%= @project.description.capitalize %></p>
+      <p><%= safe_join(@project.description.capitalize.split("\r\n"), tag(:br)) %></p>
     </div>
 
     <%# option section %>
