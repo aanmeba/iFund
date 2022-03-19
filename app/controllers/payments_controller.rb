@@ -10,7 +10,7 @@ class PaymentsController < ApplicationController
   def support_session
     # take the amount in cents
     @project.amount = (params[:price].to_f) * 100
-    puts "*********************"
+    puts "********** Payment_controller - support_session ***********"
     pp @project.id
     pp @project.title
     pp @project.amount
@@ -35,7 +35,7 @@ class PaymentsController < ApplicationController
           }
         },
         success_url: "#{root_url}payments/success/#{@project.id}",
-        cancel_url: root_url
+        cancel_url: "#{root_url}/projects/#{@project.id}"
       )
       
       @session_id = session.id
@@ -45,6 +45,8 @@ class PaymentsController < ApplicationController
   end
 
   def webhook
+    puts "********** Payment_controller - webhook starts! ***********"
+
     begin
       payload = request.raw_post
       header = request.headers['HTTP_STRIPE_SIGNATURE']
@@ -64,6 +66,8 @@ class PaymentsController < ApplicationController
     @project = Project.find(project_id)
     supporter_id = payment.metadata.user_id
     
+    puts "********** Payment_controller - webhook ***********"
+    pp event
     # create Support entry and track extra info
     Support.create(project_id: project_id, supporter_id: supporter_id, payment_id: payment_intent_id, receipt_url: payment.charges.data[0].receipt_url)
 
@@ -73,7 +77,7 @@ class PaymentsController < ApplicationController
 
   def set_project_params
     @project = Project.find(params[:id])
-    puts "*********************"
+    puts puts "********** Payment_controller - set_project_params ***********"
     pp @project.id
     pp @project.title
   end

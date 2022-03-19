@@ -11,7 +11,8 @@ module ProjectsHelper
     puts "********* Projects_heler - proj_progress **************"
     pp total
     pp goal
-    @result = (total / goal).to_f * 100
+    @result = total / (goal.to_f) * 100
+    pp @result
   end
 
   def days_to_go(date)
