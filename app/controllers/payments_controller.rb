@@ -1,7 +1,8 @@
 class PaymentsController < ApplicationController
 
   skip_before_action :verify_authenticity_token, only: [:webhook]
-  before_action :set_project_params, only: [:support_session, :success]
+  before_action :set_project_params, only: [:round_amount, :support_session, :success]
+  before_action :round_amount, only: [:support_session]
   
   def success
     # call the support instance that saved recently among the same project_id
@@ -12,9 +13,6 @@ class PaymentsController < ApplicationController
   end
 
   def support_session
-    # input validation
-    # take the amount in cents
-    @project.amount = ((params[:price]).to_f).round
     puts "********** Payment_controller - support_session ***********"
     
     # create a stripe checkout session
