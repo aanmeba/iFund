@@ -1,7 +1,8 @@
 class PaymentsController < ApplicationController
   #
   skip_before_action :verify_authenticity_token, only: [:webhook]
-  before_action :set_project_params, only: [:support_session, :success]
+  before_action :set_project_params, only: [:round_amount, :support_session, :success]
+  before_action :round_amount, only: [:support_session]
   
   def success
     puts "********** payment_controller - success ***************"
@@ -10,9 +11,6 @@ class PaymentsController < ApplicationController
   end
 
   def support_session
-    # input validation
-    # take the amount in cents
-    @project.amount = ((params[:price]).to_f).round
     puts "********** Payment_controller - support_session ***********"
     pp @project.id
     pp @project.title
@@ -73,6 +71,7 @@ class PaymentsController < ApplicationController
     puts "********** Payment_controller - webhook ***********"
     pp event
     pp receipt_url
+
     # create Support entry and track extra info
     Support.create(project_id: project_id, supporter_id: supporter_id, payment_id: payment_intent_id, receipt_url: receipt_url)
 
@@ -80,9 +79,19 @@ class PaymentsController < ApplicationController
     @project.update(amount: event.data.object.amount_total)
   end
 
+  private
+
+  def round_amount
+    # input validation - round
+    @project.amount = ((params[:price]).to_f).round(-2)
+    puts "************ payment_controller - round_amount ***********"
+    pp params[:price]
+    pp @project.amount
+  end
+
   def set_project_params
     @project = Project.find(params[:id])
-    puts puts "********** Payment_controller - set_project_params ***********"
+    puts "********** Payment_controller - set_project_params ***********"
     pp @project.id
     pp @project.title
   end
