@@ -26,5 +26,5 @@ Rails.application.routes.draw do
   post "payments/webhook", to: "payments#webhook"
   post 'payments', to: 'payments#support_session', as: 'support_session'
   
-  # match '*unmatched', to: 'application#route_not_found', via: :all
+  match '*a', to: "application#render_not_found", via: :all
 end
