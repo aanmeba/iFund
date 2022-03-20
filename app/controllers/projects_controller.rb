@@ -18,6 +18,8 @@ class ProjectsController < ApplicationController
   
   def new
     @project = Project.new
+    puts "++++++++++++ project controller - new page ++++++++++++++"
+    pp @project.goal_amount.nil?
   end
 
   def create

@@ -1,4 +1,5 @@
 class PaymentsController < ApplicationController
+  #
   skip_before_action :verify_authenticity_token, only: [:webhook]
   before_action :set_project_params, only: [:support_session, :success]
   
@@ -8,8 +9,9 @@ class PaymentsController < ApplicationController
   end
 
   def support_session
+    # input validation
     # take the amount in cents
-    @project.amount = (params[:price].to_f) * 100
+    @project.amount = ((params[:price]).to_f.round) * 100
     puts "********** Payment_controller - support_session ***********"
     pp @project.id
     pp @project.title
@@ -35,7 +37,7 @@ class PaymentsController < ApplicationController
           }
         },
         success_url: "#{root_url}payments/success/#{@project.id}",
-        cancel_url: "#{root_url}/projects/#{@project.id}"
+        cancel_url: "#{root_url}projects/#{@project.id}"
       )
       
       @session_id = session.id
