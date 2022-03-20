@@ -1,18 +1,19 @@
 <div class="container mt-5">
   <%= form_with model: @option do |f| %>
-
     <%= render "shared/validation", temp: @option, name: "option" %>
 
+    <div class="text-muted small m-3">*require field</div>
     <div class="field input-group mb-3">
-      <%= f.label :title, class: "col-sm-2 col-form-label" %>
+      <%= f.label :title, "#{format_text("title*")}", class: "col-sm-2 col-form-label" %>
       <%= f.text_field :title %>
     </div>
     <div class="field input-group mb-3">
-      <%= f.label :amount, class: "col-sm-2 col-form-label" %>
+      <%= f.label :amount, "#{format_text("amount*")}", class: "col-sm-2 col-form-label" %>
       <%= f.text_field :amount %>
+      <%= f.label :amount, "*Last two digits are cents and they will be rounded", class: "text-muted small m-1" %>
     </div>
     <div class="field input-group mb-3">
-      <%= f.label :description, class: "col-sm-2 col-form-label" %>
+      <%= f.label :description, "#{format_text("description*")}", class: "col-sm-2 col-form-label" %>
       <%= f.text_area :description %>
     </div>
 

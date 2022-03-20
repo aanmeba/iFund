@@ -16,15 +16,20 @@ class Project < ApplicationRecord
   # sanitise the input data
   before_save :coder_easter_egg
   before_save :remove_whitespace
-  before_validation :dollar_to_cents, if: :goal_amount_changed?
+  before_save :remove_decimal_points
+  # before_validation :dollar_to_cents, if: :goal_amount_changed?
 
   private
 
-  def dollar_to_cents
-    if !goal_amount.nil? && goal_amount != 0
-      self.goal_amount = (self.attributes_before_type_cast["goal_amount"].to_f * 100).round
-    end
+  def remove_decimal_points
+    self.goal_amount = self.goal_amount.round(-2)
   end
+
+  # def dollar_to_cents
+  #   if !goal_amount.nil? && goal_amount != 0
+  #     self.goal_amount = (self.attributes_before_type_cast["goal_amount"].to_f * 100).round
+  #   end
+  # end
 
   def due_date_should_be_after_start_date
     if start_date && due_date
