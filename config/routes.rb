@@ -26,7 +26,7 @@ Rails.application.routes.draw do
   post "payments/webhook", to: "payments#webhook"
   post 'payments', to: 'payments#support_session', as: 'support_session'
   
+  # to handle the routing error that happends during connecting to the Stripe
   match 'payments', to: "application#render_not_found", via: :all
   match 'options', to: "application#render_not_found", via: :all
-  # match 'projects/:id', to: "application#render_not_found", via: :all
 end

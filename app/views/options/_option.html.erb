@@ -1,5 +1,7 @@
+<%# form for options table %>
 <div class="container mt-5">
   <%= form_with model: @option do |f| %>
+    <%# render input validation alert %>
     <%= render "shared/validation", temp: @option, name: "option" %>
 
     <div class="text-muted small m-3">*require field</div>
@@ -23,6 +25,7 @@
         <%# logic for "Skip" or "Back" link when creating an option %>
         <% if !params[:project_id].nil? && !session[:project_id].nil? %>
           <%= link_to "Back", project_path(@project_id), class: "ml-3" %>
+
         <% elsif !@project_id.nil? && params[:project_id].nil? %>
           <% if @option.id.nil? %>
             <%= link_to "Skip", project_path(@project_id), class: "ml-3" %>
@@ -30,6 +33,7 @@
             <%= link_to "Back", project_path(@project_id), class: "ml-3" %>
           <% end %>
         <% end %>
+        
     </div>
   <% end %>
 </div>

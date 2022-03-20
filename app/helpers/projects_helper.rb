@@ -1,6 +1,6 @@
 module ProjectsHelper
   
-
+  # calculate the progress of the project
   def proj_progress(total, goal)
     puts "********* Projects_heler - proj_progress **************"
     pp total
@@ -9,6 +9,7 @@ module ProjectsHelper
     pp @result
   end
 
+  # calculate how many days are left
   def days_to_go(date)
     if date > Date.current
       @day_left = (date - Date.current).to_i
@@ -61,6 +62,5 @@ module ProjectsHelper
     rescue => exception
       redirect_to root_url, notice: "something went wrong to load images"
     end
-
   end
 end

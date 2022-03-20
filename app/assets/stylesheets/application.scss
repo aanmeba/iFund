@@ -38,13 +38,4 @@ body {
   border-radius: 2px;
 }
 
-// .field_with_errors {
-//   display: inline-block;
-//   margin: 0;
-//   &::before, &::after {
-//     display: inline-block;
-//     clear: none;
-//   }
-// }
-
 .field_with_errors { display: inline; }

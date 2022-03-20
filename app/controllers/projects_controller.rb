@@ -5,9 +5,11 @@ class ProjectsController < ApplicationController
   before_action :authorise_user, only: [:edit, :update, :destroy]
 
   def index
+    # sorting function in index page
     @sorting = ["create date", "ending soon", "need your support"]
     case params[:sort]
     when "1"
+      # order projects based on due_date, total_amount, or id and implement eager loading
       @projects = Project.order(:due_date).includes(:category, picture_attachment: :blob)
     when "2"
       @projects = Project.order(total_amount: :asc).includes(:category, picture_attachment: :blob)
@@ -18,8 +20,6 @@ class ProjectsController < ApplicationController
   
   def new
     @project = Project.new
-    puts "++++++++++++ project controller - new page ++++++++++++++"
-    pp @project.goal_amount.nil?
   end
 
   def create
@@ -31,8 +31,6 @@ class ProjectsController < ApplicationController
       end
       
       session[:project_id] = @project.id
-      puts "********* Projects_controller - Create **************"
-      pp @project.goal_amount # before_validation input * 100
       redirect_to new_option_path
     else
       render "new", notice: "Something went wrong"
@@ -41,8 +39,9 @@ class ProjectsController < ApplicationController
 
   def show
     @option = @options.where(project_id: @project.id)
+
+    # find support instances with the project id and count
     @total_supporters = Support.where(project_id: @project.id).count
-    #
     session[:project_id] = @project.id
   end
 
@@ -52,9 +51,6 @@ class ProjectsController < ApplicationController
   def update
     @project.update(project_params)
     if @project.save
-      # set_goal_amount_in_cents
-      puts "********* Projects_controller - Update **************"
-      pp @project.goal_amount
       redirect_to @project, notice: "#{@project.title.capitalize} is successfully updated"
     else
       set_form_vars

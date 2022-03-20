@@ -1,5 +1,6 @@
 <div class="container mt-5 align-self-center">
   <%= form_with model: @project, local: true do |f| %>
+    <%# render input validation alert %>
     <%= render "shared/validation", temp: @project, name: "project" %>
 
     <div class="text-muted small m-3">*require field</div>

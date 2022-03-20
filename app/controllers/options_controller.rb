@@ -9,13 +9,6 @@ class OptionsController < ApplicationController
 
   def new
     @option = Option.new
-    puts "****************!!!!*******************"
-    pp @project_id.nil?
-    pp @option.nil?
-    pp @option.id.nil?
-    pp @option.project_id.nil?
-    pp params
-    pp @option
   end
 
   def create
@@ -29,11 +22,6 @@ class OptionsController < ApplicationController
   end
 
   def edit
-    puts "+++++++++++++++++++++++++++++++++++++++"
-    pp params[:project_id].nil?
-    pp params[:project_id]
-    pp @option.project_id
-    pp @project_id.nil? 
   end
 
   def update
@@ -52,18 +40,18 @@ class OptionsController < ApplicationController
 
   private
 
+  # set option params
   def option_params
     params.require(:option).permit(:title, :amount, :description)
   end
 
+  # set an option instance
   def set_option
     @option = Option.find(params[:id])
   end
 
   def set_project_id
-    puts "(((((((((((((((())))))))))))))))))"
-    pp session[:project_id]
-    pp params[:project_id]
+    # store the project_id from either session or params
     if session[:project_id] || params[:project_id]
       @project_id = session[:project_id]
     end

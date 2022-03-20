@@ -1,21 +1,21 @@
 class PaymentsController < ApplicationController
-  #
+
   skip_before_action :verify_authenticity_token, only: [:webhook]
   before_action :set_project_params, only: [:round_amount, :support_session, :success]
   before_action :round_amount, only: [:support_session]
   
   def success
-    puts "********** payment_controller - success ***************"
+    # call the support instance that saved recently among the same project_id
     @support = Support.where(project_id: params[:id]).last
+
+    # increment total amount
     @project.update(total_amount: (@project.total_amount += @project.amount))
   end
 
   def support_session
     puts "********** Payment_controller - support_session ***********"
-    pp @project.id
-    pp @project.title
-    pp @project.amount
     
+    # create a stripe checkout session
     begin
       session = Stripe::Checkout::Session.create(
         payment_method_types: ['card'],
@@ -38,8 +38,9 @@ class PaymentsController < ApplicationController
         success_url: "#{root_url}payments/success/#{@project.id}",
         cancel_url: "#{root_url}projects/#{@project.id}"
       )
-      
       @session_id = session.id
+
+    # input data validation from custom field on project show
     rescue Stripe::InvalidRequestError => e
       redirect_to project_path(@project.id), notice: "Please enter the amount you want to support"
     end
@@ -67,12 +68,8 @@ class PaymentsController < ApplicationController
     @project = Project.find(project_id)
     supporter_id = payment.metadata.user_id
     receipt_url = payment.charges.data[0].receipt_url
-    
-    puts "********** Payment_controller - webhook ***********"
-    pp event
-    pp receipt_url
 
-    # create Support entry and track extra info
+    # create a Support entry and track extra info
     Support.create(project_id: project_id, supporter_id: supporter_id, payment_id: payment_intent_id, receipt_url: receipt_url)
 
     # update Project to sum up the total amount
@@ -81,18 +78,12 @@ class PaymentsController < ApplicationController
 
   private
 
+  # data validation - round
   def round_amount
-    # input validation - round
     @project.amount = ((params[:price]).to_f).round(-2)
-    puts "************ payment_controller - round_amount ***********"
-    pp params[:price]
-    pp @project.amount
   end
 
   def set_project_params
     @project = Project.find(params[:id])
-    puts "********** Payment_controller - set_project_params ***********"
-    pp @project.id
-    pp @project.title
   end
 end

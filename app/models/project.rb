@@ -17,20 +17,16 @@ class Project < ApplicationRecord
   before_save :coder_easter_egg
   before_save :remove_whitespace
   before_save :remove_decimal_points
-  # before_validation :dollar_to_cents, if: :goal_amount_changed?
 
   private
 
+  # the last two decimal points will be cents
+  # for better and clearer calculation, remove the decimal points by rouding it
   def remove_decimal_points
     self.goal_amount = self.goal_amount.round(-2)
   end
 
-  # def dollar_to_cents
-  #   if !goal_amount.nil? && goal_amount != 0
-  #     self.goal_amount = (self.attributes_before_type_cast["goal_amount"].to_f * 100).round
-  #   end
-  # end
-
+  # due date validation
   def due_date_should_be_after_start_date
     if start_date && due_date
       if (start_date > due_date) || (due_date < Date.today)
@@ -41,11 +37,13 @@ class Project < ApplicationRecord
     end
   end
   
+  # method to replace a particular word for another for fun
   def coder_easter_egg
     self.title = self.title.gsub(/welcome/i, "👻")
     self.description = self.description.gsub(/welcome/i, "👻")
   end
 
+  # method to sanitise whitespace in title and description
   def remove_whitespace
     self.title = self.title.strip
     self.description = self.description.strip

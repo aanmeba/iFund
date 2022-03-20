@@ -1,5 +1,6 @@
 <p class="badge rounded-pill bg-info text-white"><%= @categories.find(temp.category_id).name %></p>
 
+<%# call the methods from project helper %>
 <% if set_status(temp) %>
   <p class="badge rounded-pill bg-<%= set_pill(@status) %> text-white"><%= @status %></p>
 <% end %>

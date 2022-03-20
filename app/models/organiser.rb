@@ -1,3 +1,2 @@
 class Organiser < User
-  
 end

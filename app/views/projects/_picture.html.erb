@@ -1,7 +1,6 @@
+<%# load a default picture if there isn't any picture attached %>
 <% if temp.picture.attached? %>
   <%= image_tag temp.picture, alt: temp.title, class: "thumbnail card-img top img-fluid" %>
 <% else %>
-
   <%= image_tag image_link(temp), alt: temp.title, class: "thumbnail card-img top img-fluid" %>
-  <%# no image yet %>
 <% end %>
