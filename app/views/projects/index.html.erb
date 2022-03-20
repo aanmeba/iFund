@@ -1,28 +1,35 @@
 <h1 class="text-center mt-5">Discover Projects</h1>
+
 <section class="container mt-5">
-  <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4">
+  <%# sorting function %>
+  <div class="sorting links">
+    <%= form_with url: projects_path, method: :get do |f| %>
+      <div class="field input-group mb-3">
+        <%= f.select :sort, @sorting.each_with_index.map {|s, i| [format_text(s), i]} %>
+        <%= f.submit "Sort", class: "ml-1 btn btn-outline-primary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <%# individual project cards %>
+  <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-4" id="index-main-container">
     <% @projects.each do |project| %>
       <div class="col mb-4">
-        <div class="card border-dark h-100">
-          <%= render "picture", temp: project %>
-          <div class="card-body">
-            <h5><%= format_text(project.title) %></h5>
-            <p class="badge badge-pill badge-info"><%= @categories.find(project.category_id).name %></p>
+        <%= link_to project_path(project.id), class: "text-decoration-none" do %>
+          <div class="card border-dark h-100">
 
-            <% if project.start_date <= Date.current && project.due_date > Date.current %>
-              <p class="badge badge-pill badge-primary"><%= @statuses[0] %></p>
-            <% elsif project.start_date > Date.current && project.due_date > Date.current %>
-              <p class="badge badge-pill badge-primary"><%= @statuses[1] %></p>
-            <% else %>
-              <p class="badge badge-pill badge-primary"><%= @statuses[2] %></p>
-            <% end %>
+            <%# render picture partial %>
+            <%= render "picture", temp: project %>
+            
+            <div class="card-body">
+              <h5 class="text-dark"><%= format_text(project.title)%></h5>
 
-            <div class="d-flex justify-content-between">
-              <%= link_to "See More", project_path(project.id), class: "btn btn-outline-primary"%>
-              <h5>D-<%= ((project.due_date) - (project.start_date)).to_i %></h5>
+              <%# render badges & progress partial %>
+              <%= render "badges", temp: project %>
+              <%= render "progress", temp: project %>
             </div>
           </div>
-        </div>
+        <% end %>
       </div>
     <% end %>
   </div>

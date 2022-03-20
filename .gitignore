@@ -36,3 +36,8 @@ yarn-debug.log*
 .yarn-integrity
 
 /config/credentials/staging.key
+
+/config/credentials/production.key
+
+# Ignore archived code
+/app/views/shared/archive.html.erb

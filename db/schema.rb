@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_09_035141) do
+ActiveRecord::Schema.define(version: 2022_03_18_084845) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,19 +71,18 @@ ActiveRecord::Schema.define(version: 2022_03_09_035141) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "amount", default: 0
     t.integer "total_amount", default: 0
+    t.boolean "status"
     t.index ["category_id"], name: "index_projects_on_category_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "supports", force: :cascade do |t|
     t.bigint "project_id", null: false
-    t.bigint "organiser_id", null: false
     t.bigint "supporter_id", null: false
     t.string "payment_id"
     t.string "receipt_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["organiser_id"], name: "index_supports_on_organiser_id"
     t.index ["project_id"], name: "index_supports_on_project_id"
     t.index ["supporter_id"], name: "index_supports_on_supporter_id"
   end
@@ -107,6 +106,5 @@ ActiveRecord::Schema.define(version: 2022_03_09_035141) do
   add_foreign_key "projects", "categories"
   add_foreign_key "projects", "users"
   add_foreign_key "supports", "projects"
-  add_foreign_key "supports", "users", column: "organiser_id"
   add_foreign_key "supports", "users", column: "supporter_id"
 end

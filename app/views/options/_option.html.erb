@@ -1,23 +1,39 @@
+<%# form for options table %>
+<div class="container mt-5">
+  <%= form_with model: @option do |f| %>
+    <%# render input validation alert %>
+    <%= render "shared/validation", temp: @option, name: "option" %>
 
-<%= form_with model: @option do |f| %>
+    <div class="text-muted small m-3">*require field</div>
+    <div class="field input-group mb-3">
+      <%= f.label :title, "#{format_text("title*")}", class: "col-sm-2 col-form-label" %>
+      <%= f.text_field :title %>
+    </div>
+    <div class="field input-group mb-3">
+      <%= f.label :amount, "#{format_text("amount*")}", class: "col-sm-2 col-form-label" %>
+      <%= f.text_field :amount %>
+      <%= f.label :amount, "*Last two digits are cents and they will be rounded", class: "text-muted small m-1" %>
+    </div>
+    <div class="field input-group mb-3">
+      <%= f.label :description, "#{format_text("description*")}", class: "col-sm-2 col-form-label" %>
+      <%= f.text_area :description %>
+    </div>
 
-  <%= render "shared/validation", temp: @option, name: "option" %>
+    <div class="actions ml-3">
+        <%= f.submit "Save" %>
 
-  <%# <h5>Option </h5> %>
-  <div class="field">
-    <%= f.label :title, class: "col-sm-2 col-form-label" %>
-    <%= f.text_field :title %>
-    <%= f.label :title, "Title should be one word", class: "text-muted" %>
-  </div>
-  <div class="field">
-    <%= f.label :amount, class: "col-sm-2 col-form-label" %>
-    <%= f.text_field :amount %>
-  </div>
-  <div class="field">
-    <%= f.label :description, class: "col-sm-2 col-form-label" %>
-    <%= f.text_area :description %>
-  </div>
-  <div class="actions">
-      <%= f.submit "Save" %>
-  </div>
-<% end %>
+        <%# logic for "Skip" or "Back" link when creating an option %>
+        <% if !params[:project_id].nil? && !session[:project_id].nil? %>
+          <%= link_to "Back", project_path(@project_id), class: "ml-3" %>
+
+        <% elsif !@project_id.nil? && params[:project_id].nil? %>
+          <% if @option.id.nil? %>
+            <%= link_to "Skip", project_path(@project_id), class: "ml-3" %>
+          <% else %>
+            <%= link_to "Back", project_path(@project_id), class: "ml-3" %>
+          <% end %>
+        <% end %>
+        
+    </div>
+  <% end %>
+</div>

@@ -1,9 +1,11 @@
-<nav class="navbar navbar-light bg-white navbar-expand-lg sticky-top justify-content-between border-bottom mt-3">
-  <%= link_to "iFund", root_path, class: "navbar-brand" %>
+<nav id="nav" class="navbar navbar-light bg-white navbar-expand-lg sticky-top justify-content-between border-bottom mt-3">
+  <h3><%= link_to "iFund", root_path, class: "navbar-brand" %></h3>
   <ul class="nav justify-content-between">
     <li class="nav-item">
       <%= link_to "Discover", projects_path, class: "nav-link text-muted" %>
     </li>
+
+    <%# user authentication %>
     <% if user_signed_in? %>
       <li class="nav-item">
         <%= link_to "New Project", new_project_path, class: "nav-link text-muted" %>

@@ -1,39 +1,46 @@
-<div class="container mt-5">
+<div class="container mt-5 align-self-center">
   <%= form_with model: @project, local: true do |f| %>
+    <%# render input validation alert %>
+    <%= render "shared/validation", temp: @project, name: "project" %>
 
-  <%= render "shared/validation", temp: @project, name: "project" %>
-
-
-    <div class="field">
-      <%= f.label :title, class: "col-sm-2 col-form-label" %>
+    <div class="text-muted small m-3">*require field</div>
+    <div class="field input-group mb-3">
+      <%= f.label :title, "#{format_text("title*")}", class: "col-sm-2 col-form-label" %>
       <%= f.text_field :title %>
     </div>
-    <div class="field">
-      <%= f.label :category_id, class: "col-sm-2 col-form-label" %>
+    <div class="field input-group mb-3">
+      <%= f.label :category_id, "#{format_text("category*")}", class: "col-sm-2 col-form-label" %>
       <%= f.select :category_id, @categories.map {|c| [format_text(c.name), c.id]} %>
     </div>
-    <div class="field">
-      <%= f.label :start_date, class: "col-sm-2 col-form-label" %>
+    <div class="field input-group mb-3">
+      <%= f.label :start_date, "#{format_text("start date*")}", class: "col-sm-2 col-form-label" %>
       <%= f.date_field :start_date %>
     </div>
-    <div class="field">
-      <%= f.label :due_date, class: "col-sm-2 col-form-label" %>
+    <div class="field input-group mb-3">
+      <%= f.label :due_date, "#{format_text("due date*")}", class: "col-sm-2 col-form-label" %>
       <%= f.date_field :due_date %>
+      <%= f.label :due_date, "*The due date should be ahead of today", class: "text-muted small m-1" %>
+      
     </div>
-    <div class="field">
-      <%= f.label :goal_amount, class: "col-sm-2 col-form-label" %>
+
+    <div class="field input-group mb-3">
+      <%= f.label :goal_amount, "#{format_text("goal amount*")}", class: "col-sm-2 col-form-label" %>
+      <div class="input-group-prepend">
+        <span class="input-group-text">$</span>
+      </div>
       <%= f.text_field :goal_amount %>
+      <%= f.label :goal_amount, "*Last two digits are cents and they will be rounded", class: "text-muted small m-1" %>
     </div>
-    <div class="field">
-      <%= f.label :description, class: "col-md-2 col-form-label" %>
-      <%= f.text_area :description, size: "40x10" %>
+    
+    <div class="field input-group mb-3">
+      <%= f.label :description, "#{format_text("description*")}", class: "col-md-2 col-form-label" %>
+      <%= f.text_area :description, size: "40x5" %>
     </div>
-    <div class="field">
+    <div class="field input-group mb-3">
       <%= f.label :picture, class: "col-md-2 col-form-label" %>
       <%= f.file_field :picture, accept: "image/png, image/jpg, image/jpeg" %>
     </div>
-
-    <div class="actions">
+    <div class="actions ml-3">
       <%= f.submit "Save" %>
     </div>
   <% end %>

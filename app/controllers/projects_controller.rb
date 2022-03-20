@@ -5,7 +5,17 @@ class ProjectsController < ApplicationController
   before_action :authorise_user, only: [:edit, :update, :destroy]
 
   def index
-    @projects = Project.all.order(:id)
+    # sorting function in index page
+    @sorting = ["create date", "ending soon", "need your support"]
+    case params[:sort]
+    when "1"
+      # order projects based on due_date, total_amount, or id and implement eager loading
+      @projects = Project.order(:due_date).includes(:category, picture_attachment: :blob)
+    when "2"
+      @projects = Project.order(total_amount: :asc).includes(:category, picture_attachment: :blob)
+    else
+      @projects = Project.order(:id).includes(:category, picture_attachment: :blob)
+    end
   end
   
   def new
@@ -19,9 +29,9 @@ class ProjectsController < ApplicationController
       if current_user.type != "Organiser"
         current_user.update(type: "Organiser")
       end
+      
       session[:project_id] = @project.id
       redirect_to new_option_path
-
     else
       render "new", notice: "Something went wrong"
     end
@@ -29,9 +39,10 @@ class ProjectsController < ApplicationController
 
   def show
     @option = @options.where(project_id: @project.id)
-    session[:project_id] = @project.id
-    @total_supporters = Support.where(project_id: @project.id).count
 
+    # find support instances with the project id and count
+    @total_supporters = Support.where(project_id: @project.id).count
+    session[:project_id] = @project.id
   end
 
   def edit
@@ -54,10 +65,6 @@ class ProjectsController < ApplicationController
 
   private
 
-  def data_summary
-  
-  end
-
   def project_params
     params.require(:project).permit(:title, :category_id, :start_date, :due_date, :goal_amount, :description, :picture)
   end
@@ -68,7 +75,6 @@ class ProjectsController < ApplicationController
 
   def set_form_vars
     @categories = Category.all
-    @statuses = ["ongoing", "upcoming", "completed"]
     @options = Option.all
   end
 
