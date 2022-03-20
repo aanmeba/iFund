@@ -18,6 +18,8 @@
     <div class="field input-group mb-3">
       <%= f.label :due_date, "#{format_text("due date*")}", class: "col-sm-2 col-form-label" %>
       <%= f.date_field :due_date %>
+      <%= f.label :due_date, "*The due date should be ahead of today", class: "text-muted small m-1" %>
+      
     </div>
 
     <div class="field input-group mb-3">
