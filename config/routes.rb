@@ -29,4 +29,5 @@ Rails.application.routes.draw do
   # to handle the routing error that happends during connecting to the Stripe
   match 'payments', to: "application#render_not_found", via: :all
   match 'options', to: "application#render_not_found", via: :all
+
 end
