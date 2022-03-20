@@ -41,8 +41,9 @@
           <%# input field for custom amount %>
           <%= form_with url: support_session_path(id: @project.id) do |f| %>
             <div class="field">
-              <%= f.label :price, "Customise your pledge:", class: "col-form-label" %>
-              <%= f.label :price, "*Decimal points will be rounded", class: "text-muted small" %>
+              <%= f.label :price, "Customise your pledge in cents:", class: "col-form-label" %>
+              <%= f.label :price, "*Last two digits are cents and they will be rounded", class: "text-muted small" %>
+
               <div class="field input-group-sm mb-3 pledge-input">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">$</span>

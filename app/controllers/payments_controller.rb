@@ -4,14 +4,15 @@ class PaymentsController < ApplicationController
   before_action :set_project_params, only: [:support_session, :success]
   
   def success
-    @support = Support.find_by(project_id: params[:id])
+    puts "********** payment_controller - success ***************"
+    @support = Support.where(project_id: params[:id]).last
     @project.update(total_amount: (@project.total_amount += @project.amount))
   end
 
   def support_session
     # input validation
     # take the amount in cents
-    @project.amount = ((params[:price]).to_f.round) * 100
+    @project.amount = ((params[:price]).to_f).round
     puts "********** Payment_controller - support_session ***********"
     pp @project.id
     pp @project.title
@@ -67,11 +68,13 @@ class PaymentsController < ApplicationController
     project_id = payment.metadata.project_id
     @project = Project.find(project_id)
     supporter_id = payment.metadata.user_id
+    receipt_url = payment.charges.data[0].receipt_url
     
     puts "********** Payment_controller - webhook ***********"
     pp event
+    pp receipt_url
     # create Support entry and track extra info
-    Support.create(project_id: project_id, supporter_id: supporter_id, payment_id: payment_intent_id, receipt_url: payment.charges.data[0].receipt_url)
+    Support.create(project_id: project_id, supporter_id: supporter_id, payment_id: payment_intent_id, receipt_url: receipt_url)
 
     # update Project to sum up the total amount
     @project.update(amount: event.data.object.amount_total)
