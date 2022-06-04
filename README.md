@@ -1,5 +1,7 @@
 # iFund - Crowdfunding Website
 
+Marketplace app project in Coder Academy
+
 ## Links
 
 - [Deployed app - iFund](https://ifund-app.herokuapp.com/)
