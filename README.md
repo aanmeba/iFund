@@ -6,6 +6,7 @@ Marketplace app project in Coder Academy
 
 - [Deployed app - iFund](https://ifund-app.herokuapp.com/)
 - [GitHub repo](https://github.com/aanmeba/iFund)
+- [Slideshow for presentation](https://www.canva.com/design/DAE68FaJ34k/J06kXeZDUdJ3g-dRZULKEQ/view?utm_content=DAE68FaJ34k&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 # About iFund
 
